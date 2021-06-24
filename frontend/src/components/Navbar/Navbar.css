@@ -22,11 +22,11 @@ a {
 .login-link {
   background-color: #dbb0a0;
   border-radius: 4px;
-  box-shadow: 3px 3px 5px 1px #5f543b;
+  box-shadow: 3px 3px 5px 1px rgb(131,105,83);
 
 }
 .signup-link {
   background-color: #eab586;
   border-radius: 4px;
-  box-shadow: -3px -3px 5px 1px #5f543b;
+  box-shadow: -3px -3px 5px 1px rgb(128,117,90);
 }
