@@ -1,7 +1,8 @@
 .PageHeader {
-  background-color: #a37c82;
+  background-color: #002a29;
+  color: #fff;
   text-transform: uppercase;
-  height: 100px;
+  height: 150px;
   font-family: 'Josefin Sans', sans-serif;
   font-size: 30px;
   display: flex;
