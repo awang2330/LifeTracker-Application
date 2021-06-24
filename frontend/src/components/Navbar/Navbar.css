@@ -1,0 +1,26 @@
+.Navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-family: 'Baloo 2', cursive;
+  padding: 10px;
+}
+a {
+  text-decoration: none;
+  color: #000;
+  margin: 10px;
+  font-size: 20px;
+}
+
+.home-link {
+  width: 60px;
+}
+.home-link img {
+  width: 100%;
+}
+.login-link {
+  background-color: #dbb0a0;
+}
+.signup-link {
+  background-color: #eab586;
+}
