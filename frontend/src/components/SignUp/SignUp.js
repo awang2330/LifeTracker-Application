@@ -25,7 +25,7 @@ export default function Signup() {
         setErrors((e) => ({ ...e, passwordConfirm: null }))
       }
     }
-    // check that password is equal to password confirm
+    // heck that password is equal to password confirm
     if (event.target.name === "passwordConfirm") {
       if (form.password && form.password !== event.target.value) {
         setErrors((e) => ({ ...e, passwordConfirm: "Passwords do not match" }))
@@ -33,6 +33,7 @@ export default function Signup() {
         setErrors((e) => ({ ...e, passwordConfirm: null }))
       }
     }
+
     if (event.target.name === "email") {
       if (event.target.value.indexOf("@") <= 0) {
         setErrors((e) => ({ ...e, email: "Please enter a valid email." }))
@@ -45,15 +46,23 @@ export default function Signup() {
   }
 
   const handleOnSubmit = async (event) => {
+    console.log(errors)
     setIsLoading(true)
     setErrors((e) => ({ ...e, form: null }))
 
+    // check that the password and email fields are valid before registering user
     if (form.passwordConfirm !== form.password) {
       setErrors((e) => ({ ...e, passwordConfirm: "Passwords do not match." }))
-      setIsLoading(false)
       return
     } else {
       setErrors((e) => ({ ...e, passwordConfirm: null }))
+    }
+
+    if (form.email.indexOf("@") <= 0) {
+        setErrors((e) => ({ ...e, email: "Please enter a valid email." }))
+        return
+    } else {
+      setErrors((e) => ({ ...e, email: null }))
     }
 
     try {
