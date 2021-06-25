@@ -10,6 +10,7 @@ export default function Signup() {
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
+    username: "",
     email: "",
     password: "",
     passwordConfirm: ""
@@ -61,10 +62,10 @@ export default function Signup() {
         location: form.location,
         firstName: form.firstName,
         lastName: form.lastName,
+        username: form.username,
         email: form.email,
         password: form.password,
       })
-
       if (res?.data?.user) {
         // setAppState(res.data)
         setIsLoading(false)
@@ -96,6 +97,11 @@ export default function Signup() {
               <input type='text' name='lastName' placeholder='Path' value={form.lastName} onChange={handleOnInputChange} />
             </div>
           </div>
+
+          <div className='form-input'>
+              <label htmlFor='name'>Username</label>
+              <input type='text' name='username' placeholder='codepath' value={form.username} onChange={handleOnInputChange} />
+            </div>
         
           <div className="form-input">
             <label htmlFor="email">Email</label>

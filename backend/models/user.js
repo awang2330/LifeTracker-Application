@@ -33,7 +33,8 @@ class User {
   }
 
   static async register(creds) {
-    const reqFields = ["email", "password", "isAdmin"]
+    const reqFields = ["email", "password", "username"]
+    console.log(creds)
     reqFields.forEach(field => {
       if (!creds.hasOwnProperty(field)) {
         throw new BadRequestError(`Missing ${field} in request body.`)
@@ -41,6 +42,7 @@ class User {
     })
 
     if (creds.email.indexOf("@") <= 0) {
+      console.log("email error")
       throw new BadRequestError("Invalid email.")
     }
 
@@ -53,6 +55,7 @@ class User {
     const normalizedEmail = creds.email.toLowerCase()
 
     // insert new user into database
+    console.log("insert")
     const userResult = await db.query(
       `INSERT INTO users(email, password, is_admin)
        VALUES ($1, $2, $3)
