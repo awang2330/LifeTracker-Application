@@ -42,13 +42,12 @@ class User {
     })
 
     if (creds.email.indexOf("@") <= 0) {
-      console.log("email error")
       throw new BadRequestError("Invalid email.")
     }
 
-    const existingUser = await User.fetchUserByEmail(credentials.email)
+    const existingUser = await User.fetchUserByEmail(creds.email)
     if (existingUser) {
-      throw new BadRequestError(`A user already exists with email: ${credentials.email}`)
+      throw new BadRequestError(`A user already exists with email: ${credss.email}`)
     }
 
     const hashedPassword = await bcrypt.hash(creds.password, BCRYPT_WORK_FACTOR)
@@ -57,10 +56,10 @@ class User {
     // insert new user into database
     console.log("insert")
     const userResult = await db.query(
-      `INSERT INTO users(email, password, is_admin)
+      `INSERT INTO users(email, password, username)
        VALUES ($1, $2, $3)
-       RETURNING id, email, is_admin, created_at;
-      `, [normalizedEmail, hashedPassword, creds.isAdmin]
+       RETURNING id, email, username, created_at;
+      `, [normalizedEmail, hashedPassword, creds.username]
     )
 
     const user = userResult.rows[0]
