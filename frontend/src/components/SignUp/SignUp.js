@@ -13,8 +13,7 @@ export default function Signup() {
     username: "",
     email: "",
     password: "",
-    passwordConfirm: "",
-    date: ""
+    passwordConfirm: ""
   })
 
   const handleOnInputChange = (event) => {
@@ -59,7 +58,6 @@ export default function Signup() {
 
     try {
       const res = await axios.post("http://localhost:3001/auth/register", {
-        date: form.date,
         firstName: form.firstName,
         lastName: form.lastName,
         username: form.username,
@@ -67,9 +65,7 @@ export default function Signup() {
         password: form.password,
       })
       if (res?.data?.user) {
-        // setAppState(res.data)
         setIsLoading(false)
-        // navigate("/portal")
       } else {
         setErrors((e) => ({ ...e, form: "Something went wrong with registration" }))
         setIsLoading(false)

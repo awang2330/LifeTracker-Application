@@ -11,7 +11,6 @@ class User {
       last_name: user.lastName,
       email: user.email,
       username: user.username,
-      date: user.date,
     }
   }
 
@@ -35,39 +34,35 @@ class User {
   }
 
   static async register(creds) {
-    console.log(creds)
     const reqFields = ["firstName", "lastName", "email", "password", "username"]
     console.log("fields")
     reqFields.forEach(field => {
       if (!creds.hasOwnProperty(field)) {
+        console.log(`Missing ${field} in request body.`)
         throw new BadRequestError(`Missing ${field} in request body.`)
       }
     })
 
-    console.log("email")
     if (creds.email.indexOf("@") <= 0) {
+      console.log("Invalid email.")
       throw new BadRequestError("Invalid email.")
     }
 
-    console.log("existing user")
     const existingUser = await User.fetchUserByEmail(creds.email)
     if (existingUser) {
+      console.log(`A user already exists with email: ${creds.email}`)
       throw new BadRequestError(`A user already exists with email: ${creds.email}`)
     }
 
     const hashedPassword = await bcrypt.hash(creds.password, BCRYPT_WORK_FACTOR)
     const normalizedEmail = creds.email.toLowerCase()
 
-    console.log("insert")
-    // insert new user into database
     const userResult = await db.query(
-      `INSERT INTO users (first_name, last_name, username, email, password, date)
-       VALUES ($1, $2, $3, $4, $5, $6)
-       RETURNING id, first_name, last_name, username, email, date;
-      `, [creds.firstName, creds.lastName, creds.username, normalizedEmail, hashedPassword, creds.date]
+      `INSERT INTO users (first_name, last_name, username, email, password)
+       VALUES ($1, $2, $3, $4, $5)
+       RETURNING id, first_name, last_name, username, email, is_admin, date;
+      `, [creds.firstName, creds.lastName, creds.username, normalizedEmail, hashedPassword]
     )
-
-    console.log(userResult)
     const user = userResult.rows[0]
 
     return User.makePublicUser(user)

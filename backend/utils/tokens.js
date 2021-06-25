@@ -17,6 +17,7 @@ const validateToken = (date) => {
     const decoded = jwt.verify(token, SECRET_KEY)
     return decoded
   } catch(err) {
+    console.log(err)
     return {}
   }
 }
