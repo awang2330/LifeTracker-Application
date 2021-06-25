@@ -5,7 +5,7 @@ import axios from 'axios'
 import PageHeader from '../PageHeader/PageHeader'
 import './Login.css'
 
-export default function Login({ setAppState }) {
+export default function Login() {
   const [isLoading, setIsLoading] = useState(false)
   const [errors, setErrors] = useState({})
   const [form, setForm] = useState({
