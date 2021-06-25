@@ -4,18 +4,18 @@
   justify-content: space-around;
   align-items: center;
   font-family: 'Baloo 2', cursive;
-  padding: 10px;
+  padding: 5px;
 }
-a {
+.Navbar a {
   text-decoration: none;
   color: #000;
-  margin: 10px;
+  margin: 5px 10px;
   font-size: 20px;
-  padding: 5px;
+  padding: 0 5px;
 }
 
 .home-link {
-  width: 60px;
+  width: 50px;
 }
 .home-link img {
   width: 100%;
