@@ -7,9 +7,11 @@ class User {
   static makePublicUser(user) {
     return {
       id: user.id,
+      first_name: user.firstName,
+      last_name: user.lastName,
       email: user.email,
-      isAdmin: user.is_admin,
-      createdAt: user.created_at,
+      username: user.username,
+      date: user.date,
     }
   }
 
@@ -33,35 +35,39 @@ class User {
   }
 
   static async register(creds) {
-    const reqFields = ["email", "password", "username"]
     console.log(creds)
+    const reqFields = ["firstName", "lastName", "email", "password", "username"]
+    console.log("fields")
     reqFields.forEach(field => {
       if (!creds.hasOwnProperty(field)) {
         throw new BadRequestError(`Missing ${field} in request body.`)
       }
     })
 
+    console.log("email")
     if (creds.email.indexOf("@") <= 0) {
       throw new BadRequestError("Invalid email.")
     }
 
+    console.log("existing user")
     const existingUser = await User.fetchUserByEmail(creds.email)
     if (existingUser) {
-      throw new BadRequestError(`A user already exists with email: ${credss.email}`)
+      throw new BadRequestError(`A user already exists with email: ${creds.email}`)
     }
 
     const hashedPassword = await bcrypt.hash(creds.password, BCRYPT_WORK_FACTOR)
     const normalizedEmail = creds.email.toLowerCase()
 
-    // insert new user into database
     console.log("insert")
+    // insert new user into database
     const userResult = await db.query(
-      `INSERT INTO users(email, password, username)
-       VALUES ($1, $2, $3)
-       RETURNING id, email, username, created_at;
-      `, [normalizedEmail, hashedPassword, creds.username]
+      `INSERT INTO users (first_name, last_name, username, email, password, date)
+       VALUES ($1, $2, $3, $4, $5, $6)
+       RETURNING id, first_name, last_name, username, email, date;
+      `, [creds.firstName, creds.lastName, creds.username, normalizedEmail, hashedPassword, creds.date]
     )
 
+    console.log(userResult)
     const user = userResult.rows[0]
 
     return User.makePublicUser(user)

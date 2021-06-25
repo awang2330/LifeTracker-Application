@@ -13,7 +13,8 @@ export default function Signup() {
     username: "",
     email: "",
     password: "",
-    passwordConfirm: ""
+    passwordConfirm: "",
+    date: ""
   })
 
   const handleOnInputChange = (event) => {
@@ -34,7 +35,7 @@ export default function Signup() {
       }
     }
     if (event.target.name === "email") {
-      if (event.target.value.indexOf("@") === -1) {
+      if (event.target.value.indexOf("@") <= 0) {
         setErrors((e) => ({ ...e, email: "Please enter a valid email." }))
       } else {
         setErrors((e) => ({ ...e, email: null }))
@@ -59,7 +60,6 @@ export default function Signup() {
     try {
       const res = await axios.post("http://localhost:3001/auth/register", {
         date: form.date,
-        location: form.location,
         firstName: form.firstName,
         lastName: form.lastName,
         username: form.username,
