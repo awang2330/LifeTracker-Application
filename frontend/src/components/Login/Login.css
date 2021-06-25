@@ -7,15 +7,20 @@
   flex-direction: column;
   align-items: center;
 }
-.form {
+.form, .form-fields {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
 }
-.form-input {
-  margin: 10px;
+.form-fields {
+  overflow: hidden;
   width: 300px;
+}
+.form-input {
+  max-width: 100%;
+  margin: 10px;
+  width: 100%;
 }
 label {
   display: block;
@@ -31,6 +36,7 @@ button {
   padding: 5px 10px;
   font-size: 18px;
   border-radius: 5px;
+  cursor: pointer;
 }
 .login-btn {
   background-color: #dbb0a0;

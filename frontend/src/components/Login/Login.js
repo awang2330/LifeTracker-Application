@@ -21,7 +21,6 @@ export default function Login({ setAppState }) {
         setErrors((e) => ({ ...e, email: null }))
       }
     }
-
     setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
   }
 
@@ -51,12 +50,12 @@ export default function Login({ setAppState }) {
   return (
     <div className="Login">
       <PageHeader sectionName='Login'/>
-      <div>
-
-        <div className='form'>
+      <div className='form'>
+        <div className='form-fields'>
           <div className='form-input'>
             <label htmlFor='email'>Email</label>
             <input type='email' name='email' placeholder='user@codepath.org' value={form.email} onChange={handleOnInputChange}/>
+            {errors.email && <span className="error">{errors.email}</span>}
           </div>
           <div className='form-input'>
             <label htmlFor='password'>Password</label>
@@ -64,10 +63,9 @@ export default function Login({ setAppState }) {
           </div>
           <button className='login-btn' onClick={handleOnSubmit}>Login</button>
         </div>
-
-        <div className='login-footer'>
-          <p>Don't have an account? Sign up <Link to="/register">here</Link></p>
-        </div>
+      </div>
+      <div className='login-footer'>
+        <p>Don't have an account? Sign up <Link to="/signup">here</Link></p>
       </div>
     </div>
   )
