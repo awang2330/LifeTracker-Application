@@ -15,12 +15,15 @@ class User {
   }
 
   static async login(creds) {
+    console.log("login")
+    console.log(creds)
     const reqFields = ["email", "password"]
     reqFields.forEach(field => {
       if (!creds.hasOwnProperty(field)) {
         throw new BadRequestError(`Missing ${field} in request body.`)
       }
     })
+
     const user = await User.fetchUserByEmail(creds.email)
     if (user) {
       // compare entered password with password in database
@@ -30,6 +33,7 @@ class User {
       }
     }
 
+    console.log("Invalid email/password")
     throw new UnauthorizedError("Invalid email/password")
   }
 

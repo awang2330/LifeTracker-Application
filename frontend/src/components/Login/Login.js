@@ -32,9 +32,7 @@ export default function Login() {
     try {
       const res = await axios.post(`http://localhost:3001/auth/login`, form)
       if (res?.data) {
-        // setAppState(res.data)
         setIsLoading(false)
-        // navigate("/portal")
       } else {
         setErrors((e) => ({ ...e, form: "Invalid username/password combination" }))
         setIsLoading(false)
