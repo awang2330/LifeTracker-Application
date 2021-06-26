@@ -59,6 +59,7 @@ export default function Login() {
             <label htmlFor='password'>Password</label>
             <input type='password' name='password' placeholder='*********' value={form.password} onChange={handleOnInputChange}/>
           </div>
+          {errors.form && <span className="error">{errors.form}</span>}
           <button className='login-btn' onClick={handleOnSubmit}>Login</button>
         </div>
       </div>

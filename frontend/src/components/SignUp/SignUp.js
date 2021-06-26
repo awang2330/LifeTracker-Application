@@ -25,7 +25,7 @@ export default function Signup() {
         setErrors((e) => ({ ...e, passwordConfirm: null }))
       }
     }
-    // heck that password is equal to password confirm
+    // check that password is equal to password confirm
     if (event.target.name === "passwordConfirm") {
       if (form.password && form.password !== event.target.value) {
         setErrors((e) => ({ ...e, passwordConfirm: "Passwords do not match" }))
@@ -46,7 +46,6 @@ export default function Signup() {
   }
 
   const handleOnSubmit = async (event) => {
-    console.log(errors)
     setIsLoading(true)
     setErrors((e) => ({ ...e, form: null }))
 
@@ -117,7 +116,7 @@ export default function Signup() {
           <div className="form-input">
             <label htmlFor="password">Password</label>
             <input type="password" name="password" placeholder="*********" value={form.password} onChange={handleOnInputChange}/>
-            {/* {errors.password && <span className="error">{errors.password}</span>} */}
+            {errors.password && <span className="error">{errors.password}</span>}
           </div>
 
           <div className="form-input">
@@ -126,6 +125,7 @@ export default function Signup() {
             {errors.passwordConfirm && <span className="error">{errors.passwordConfirm}</span>}
           </div>
 
+          {errors.form && <span className="error">{errors.form}</span>}
           <button className='login-btn' onClick={handleOnSubmit}>Sign Up</button>
         </div>
       </div>
