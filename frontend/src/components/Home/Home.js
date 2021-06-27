@@ -40,7 +40,7 @@ export default function Home() {
       </div>
       <div className='home-layout'>
         {items.map(item => (
-          <HomeItem item={item}/>
+          <HomeItem key={item.id} item={item}/>
         ))}
       </div>
     </div>

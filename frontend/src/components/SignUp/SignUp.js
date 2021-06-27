@@ -1,10 +1,11 @@
 import { useState } from 'react'
+import { useNavigate } from "react-router-dom"
 import axios from 'axios'
 import PageHeader from '../PageHeader/PageHeader'
 import './Signup.css'
 
-export default function Signup() {
-  // const navigate = useNavigate()
+export default function Signup({ setAppState }) {
+  const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
   const [errors, setErrors] = useState({})
   const [form, setForm] = useState({
@@ -73,7 +74,9 @@ export default function Signup() {
         password: form.password,
       })
       if (res?.data?.user) {
+        setAppState(res.data)
         setIsLoading(false)
+        navigate("/activity")
       } else {
         setErrors((e) => ({ ...e, form: "Something went wrong with registration" }))
         setIsLoading(false)
@@ -89,6 +92,9 @@ export default function Signup() {
   return (
     <div className="Signup">
       <PageHeader sectionName='Sign Up'/>
+
+      {errors.form && <span className="error">{errors.form}</span>}
+
       <div className='form'>
         <div className='form-fields'>
           <div className='form-input-name'>
