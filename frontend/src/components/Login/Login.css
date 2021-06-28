@@ -13,14 +13,12 @@
   align-items: center;
 }
 .form-fields {
-  overflow: hidden;
   width: 400px;
 }
 .form-input {
   max-width: 100%;
   margin: 10px;
   width: 100%;
-  overflow: hidden;
 }
 label {
   display: block;
