@@ -13,7 +13,7 @@ export default function Exercise({ user, setAppState }) {
         <div></div>
       </>
       : 
-      <Nouser />
+      <Nouser page='exercise info'/>
       }
     </div>
   )

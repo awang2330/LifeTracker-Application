@@ -1,10 +1,9 @@
-import { Link, useNavigate } from "react-router-dom"
+
 import PageHeader from '../PageHeader/PageHeader'
 import Nouser from "../Nouser/Nouser"
 import './Activity.css'
 
 export default function Activity({ user, setAppState }) {
-  const navigate = useNavigate()
   const isAuthenticated = Boolean(user?.email)
 
   return (
@@ -18,10 +17,8 @@ export default function Activity({ user, setAppState }) {
         <button className='sleep-btn'>Log Sleep</button>
       </div>
     </> : 
-      <Nouser />
+      <Nouser page='activity'/>
     }
-      
-      
     </div>
   )
 }

@@ -14,7 +14,7 @@ export default function Nutrition({ user, setAppState }) {
         <div></div>
       </>
       : 
-      <Nouser />
+      <Nouser page='nutrition info'/>
       }
     </div>
   )

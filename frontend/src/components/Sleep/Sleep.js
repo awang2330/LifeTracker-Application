@@ -14,7 +14,7 @@ export default function Sleep({ user, setAppState }) {
         <div></div>
       </>
       : 
-      <Nouser />
+      <Nouser page='sleep info'/>
       }
     </div>
   )
