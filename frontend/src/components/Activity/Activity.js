@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom"
 import PageHeader from '../PageHeader/PageHeader'
+import Nouser from "../Nouser/Nouser"
 import './Activity.css'
 
 export default function Activity({ user, setAppState }) {
@@ -8,7 +9,19 @@ export default function Activity({ user, setAppState }) {
 
   return (
     <div className="Activity"> 
-    <PageHeader sectionName='Activity'/>
+    {isAuthenticated ? 
+    <>
+      <PageHeader sectionName='Activity'/>
+      <div className="activity-btns">
+        <button className='exercise-btn'>Add Exercise</button>
+        <button className='nutrition-btn'>Record Nutrition</button>
+        <button className='sleep-btn'>Log Sleep</button>
+      </div>
+    </> : 
+      <Nouser />
+    }
+      
+      
     </div>
   )
 }

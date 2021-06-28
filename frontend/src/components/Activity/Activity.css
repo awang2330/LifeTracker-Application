@@ -1,0 +1,19 @@
+.Activity {
+  
+}
+.activity-btns {
+  display: flex;
+  justify-content: flex-end;
+}
+.activity-btns button {
+  font-family: 'Baloo 2', cursive;
+  border-radius: 10px;
+  margin: 10px;
+  border: 2px solid #000;
+}
+.exercise-btn {
+}
+.nutrition-btn { 
+}
+.sleep-btn {
+}

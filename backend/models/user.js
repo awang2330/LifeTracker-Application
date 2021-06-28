@@ -15,12 +15,9 @@ class User {
   }
 
   static async login(creds) {
-    console.log("login")
-    console.log(creds)
     const reqFields = ["email", "password"]
     reqFields.forEach(field => {
       if (!creds.hasOwnProperty(field)) {
-        console.log(`Missing ${field} in request body.`)
         throw new BadRequestError(`Missing ${field} in request body.`)
       }
     })
@@ -34,28 +31,23 @@ class User {
       }
     }
 
-    console.log("Invalid email/password")
     throw new UnauthorizedError("Invalid email/password")
   }
 
   static async register(creds) {
     const reqFields = ["firstName", "lastName", "email", "password", "username"]
-    console.log("fields")
     reqFields.forEach(field => {
       if (!creds.hasOwnProperty(field)) {
-        console.log(`Missing ${field} in request body.`)
         throw new BadRequestError(`Missing ${field} in request body.`)
       }
     })
 
     if (creds.email.indexOf("@") <= 0) {
-      console.log("Invalid email.")
       throw new BadRequestError("Invalid email.")
     }
 
     const existingUser = await User.fetchUserByEmail(creds.email)
     if (existingUser) {
-      console.log(`A user already exists with email: ${creds.email}`)
       throw new BadRequestError(`A user already exists with email: ${creds.email}`)
     }
 
