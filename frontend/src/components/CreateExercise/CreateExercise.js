@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
+import PageHeader from '../PageHeader/PageHeader'
 import API from '../../services/apiClient'
 import './CreateExercise.css'
 
@@ -26,6 +27,7 @@ export default function CreateExercise({ appState, user, handleUpdateExercise })
   }
 
   const handleOnSave =  async () => {
+    setIsLoading(true)
     const { data, error } = await API.createExercise({
       name: form.name,
       category: form.category,
@@ -39,11 +41,13 @@ export default function CreateExercise({ appState, user, handleUpdateExercise })
       console.log(error)
       setErrors(e => ({...e, error}))
     }
+    setIsLoading(false)
     navigate('/exercise')
   }
 
   return (
     <div className='CreateExercise'>
+      <PageHeader sectionName='Exercise'/>
       <div className='form'>
         <div className='form-fields'>
           <div className='form-input'>

@@ -1,4 +1,8 @@
-.exercise-btn {
+.aty-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+.aty-btn a {
   text-decoration: none;
   font-family: 'Baloo 2', cursive;
   border-radius: 10px;
@@ -7,22 +11,53 @@
   font-weight: 500;
   padding: 5px;
   background-color: #fff;
-
-  float: right;
 }
 
+.aty-section {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 .aty-card {
-  width: 300px;
-  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 360px;
+  height: 200;
+  padding: 16px 32px;
   background-color: #fff;
+  border-radius: 20px;
 }
-
-.aty-category {
-  /* color: #fff;
-  font-size: 18px;
+.aty-type {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   text-transform: uppercase;
-  background-color: #546747;
-  float: right;
-  padding: 8px;
-  border-radius: 20px; */
+  align-items: center;
+}
+.aty-name {
+  font-size: 25px;
+}
+.aty-category {
+  border: 2px solid #000;
+  font-size: 16px;
+  padding: 2px 4px;
+  border-radius: 6px;
+}
+.aty-stats {
+  display: flex;
+  flex-direction: column;
+}
+.aty-stats > div {
+  font-size: 20px;
+
+}
+.aty-stats > div > span {
+  font-size: 18px;
+}
+.aty-duration {
+
+}
+.aty-intensity {
+
 }
