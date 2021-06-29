@@ -26,4 +26,15 @@ router.post('/register', async (req, res, next) => {
   }
 }) 
 
+router.get('/me', requireAuthenticateUser, async(req, res, next) => {
+  try {
+    const { email } = res.locals.user
+    const user =  await User.fetchUserByEmail(email)
+    const publicUser = await User.makePublicUser(user)
+    return res.json({ user: publicUser })
+  } catch(err) {
+    next(err)
+  }
+})
+
 module.exports = router
