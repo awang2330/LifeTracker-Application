@@ -5,7 +5,7 @@ import PageHeader from '../PageHeader/PageHeader'
 import Nouser from "../Nouser/Nouser"
 import './Exercise.css'
 
-export default function Exercise({ user, setAppState, exercises = []}) {
+export default function Exercise({ user, setAppState, exercises}) {
   const isAuthenticated = Boolean(user?.email)
   
   return (
@@ -15,9 +15,9 @@ export default function Exercise({ user, setAppState, exercises = []}) {
         <PageHeader sectionName='Exercise'/>
         <Link className='exercise-btn' to='activity/exercises'>Add Exercise</Link>
         <div>
-          {exercises.map(item => (
+          {/* {exercises.map(item => (
             <div></div>
-          ))}
+          ))} */}
         </div>
       </>
       : 

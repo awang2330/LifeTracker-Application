@@ -35,7 +35,7 @@ export default function App() {
   useEffect(() => {
     const fetchExercises = async () => {
       setIsLoading(true)
-      const { data, error } = await API.fetchActivitiesForUser()
+      const { data, error } = await API.fetchExercises()
       if (data) {
         setExercises(data)
       }
@@ -46,6 +46,8 @@ export default function App() {
     }
     fetchExercises()
   }, [])
+
+  console.log(exercises)
 
   return (
     <div className="App">
