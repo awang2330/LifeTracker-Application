@@ -2,6 +2,24 @@ const db = require('../db')
 const { BadRequestError, UnauthorizedError } = require('../utils/errors')
 
 class Activity {
+  /** Return a lsit of all exercises of an user */
+  static async listExercises({ user }) {
+    if (!user) {
+      throw new UnauthorizedError(`No user logged in.`)
+    }
+
+    const results = await db.query(`
+      SELECT id, user_id AS "userId", name, category, duration, intensity, date
+      FROM exercises
+      WHERE user_id = (
+        SELECT id FROM users WHERE username = $1
+      );
+    `, [user.username]
+    )
+    return results.rows
+  }
+
+  /** Create an exercise into exercises table */
   static async createExercise({ exercise, user }) {
     if (!user) {
       throw new UnauthorizedError(`No user logged in.`)
@@ -38,7 +56,6 @@ class Activity {
   }
 
   static async createNutrition({ nutrition, user }) {
-    console.log("nutrtion")
     if (!user) {
       throw new UnauthorizedError(`No user logged in.`)
     }

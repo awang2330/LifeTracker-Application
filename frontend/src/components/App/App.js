@@ -18,28 +18,7 @@ import API from '../../services/apiClient'
 
 export default function App() {
   const [appState, setAppState] = useState({})
-  const [exercises, setExercises] = useState({})
-  const [errors, setErrors] = useState({})
-
-  // setExercises(API.fetchActivitiesForUser('exercises'))
-  // console.log(exercises)
-  useEffect(() => {
-    
-    const fetchExercises = async () => {
-      try {
-        const req = await axios.get("http://localhost:3001/activity/exercises")
-
-        const exercises = req?.data?.exercises
-        if (exercises) {
-          setExercises(exercises)
-        }
-      } catch(err) {
-        console.log(err)
-        setErrors(e => ({...e, err}))
-      }
-    }
-    fetchExercises()
-  }, [])
+  const [errors, setErrors] = useState({}) 
 
   const handleLogout = async () => {
     await API.logoutUser()

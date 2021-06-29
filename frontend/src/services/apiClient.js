@@ -31,8 +31,8 @@ class ApiClient {
     }
   }
 
-  async fetchActivitiesForUser({ activityName }) {
-    return await this.request({ endpoint: `activity/${activityName}`})
+  async fetchExercises() {
+    return await this.request({ endpoint: `activity/exercises`})
   }
 
   async signupUser(credentials) {
