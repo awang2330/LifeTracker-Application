@@ -11,12 +11,18 @@
   float: right;
 }
 
+.aty-card {
+  width: 300px;
+  margin: 20px;
+  background-color: #fff;
+}
+
 .aty-category {
-  color: #fff;
+  /* color: #fff;
   font-size: 18px;
   text-transform: uppercase;
   background-color: #546747;
   float: right;
   padding: 8px;
-  border-radius: 20px;
+  border-radius: 20px; */
 }

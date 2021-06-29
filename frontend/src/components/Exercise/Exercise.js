@@ -5,9 +5,10 @@ import PageHeader from '../PageHeader/PageHeader'
 import Nouser from "../Nouser/Nouser"
 import './Exercise.css'
 
-export default function Exercise({ user, setAppState, exercises }) {
+export default function Exercise({ user, setAppState, exercises = []}) {
   const isAuthenticated = Boolean(user?.email)
-  
+  console.log(exercises)
+  console.log(typeof(exercises))
   return (
     <div className="Exercise">
       {isAuthenticated ? 
@@ -15,7 +16,7 @@ export default function Exercise({ user, setAppState, exercises }) {
         <PageHeader sectionName='Exercise'/>
         <Link className='exercise-btn' to='/activity/exercises'>Add Exercise</Link>
         <div>
-          {exercises ?
+          {exercises === [] ?
             exercises.map((item) => (
               <div key={item.id} className='aty-card'>
                 <div className='aty-name'>{item.name}</div>
