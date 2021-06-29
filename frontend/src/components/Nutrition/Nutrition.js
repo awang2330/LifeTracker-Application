@@ -1,4 +1,4 @@
-
+import { Link } from 'react-router-dom'
 import PageHeader from '../PageHeader/PageHeader'
 import Nouser from "../Nouser/Nouser"
 import './Nutrition.css'
@@ -11,7 +11,7 @@ export default function Nutrition({ user, setAppState }) {
       {isAuthenticated ? 
       <>
         <PageHeader sectionName='Nutrition'/>
-        <div></div>
+        <Link to='/nutrition/create' className='nutrition-btn'>Add Nutrition</Link>
       </>
       : 
       <Nouser page='nutrition info'/>
