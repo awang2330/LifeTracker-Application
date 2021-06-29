@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
-import axios from 'axios'
 
 import Navbar from '../Navbar/Navbar'
 import Home from '../Home/Home'
@@ -52,8 +51,8 @@ export default function App() {
     const fetchExercises = async () => {
       setIsLoading(true)
       const { data, error } = await API.fetchExercises()
-      if (data) {
-        setExercises(data)
+      if (data.listExercises) {
+        setExercises(data.listExercises)
       }
       if (error) {
         setErrors((e) => ({ ...e, error }))
@@ -62,8 +61,6 @@ export default function App() {
     }
     fetchExercises()
   }, [])
-
-  console.log(exercises)
 
   return (
     <div className="App">

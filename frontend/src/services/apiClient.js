@@ -10,11 +10,9 @@ class ApiClient {
   setToken(token) {
     this.token = token
     localStorage.setItem(this.tokenName, token)
-    console.log(this.token)
   }
 
   async request({ endpoint, method = `GET`, data = {} }) {
-    console.log(this.token)
     const url = `${this.remoteHostUrl}/${endpoint}`
 
     const headers = {
