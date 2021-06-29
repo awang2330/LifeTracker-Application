@@ -14,8 +14,18 @@ export default function CreateExercise({ appState, user, handleUpdateExercise })
   })
 
   const handleOnInputChange = (event) => {
-    
+    if (event.target.name === 'duration') {
+      // check if integer
+    }
+    if (event.target.name === 'intensity') {
+      // check if integer and range
+    }
     setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
+  }
+
+  const handleOnSave = () => {
+    handleUpdateExercise(form)
+    navigate('/exercise')
   }
 
   return (
@@ -39,7 +49,7 @@ export default function CreateExercise({ appState, user, handleUpdateExercise })
             <input type="number" name="intensity" min="1" max="10" value={form.intensity} onChange={handleOnInputChange}/>
            </div>
           {errors.form && <span className="error">{errors.form}</span>}
-          <button className='login-btn' onClick={handleUpdateExercise}>Save</button>
+          <button className='login-btn' onClick={handleOnSave}>Save</button>
         </div>
       </div>
     </div>
