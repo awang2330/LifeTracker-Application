@@ -1,15 +1,11 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import clock from '../../assets/risto_pekkala_Alarm_clock.svg'
 import './Navbar.css'
 
-export default function Navbar( { user, setAppState }) {
-  const navigate = useNavigate()
+export default function Navbar( { user, setAppState, handleLogout }) {
   const isAuthenticated = Boolean(user?.email)
-  const handleOnLogout = () => {
-    setAppState({})
-    navigate("/")
-  }
+
   return (
     <div className="Navbar">
       <Link to='/' className='home-link'>
@@ -21,7 +17,7 @@ export default function Navbar( { user, setAppState }) {
         <Link to='/nutrition'>Nutrition</Link>
         <Link to='/sleep'>Sleep</Link>
         {isAuthenticated ? 
-        <button className="logout-link" onClick={handleOnLogout}>Logout</button> : 
+        <button className="logout-link" onClick={handleLogout}>Logout</button> : 
         <>
           <Link to='/login' className='login-link'>Login</Link>
           <Link to='/signup' className='signup-link'>Signup</Link>

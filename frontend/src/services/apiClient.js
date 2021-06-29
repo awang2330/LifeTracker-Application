@@ -31,6 +31,23 @@ class ApiClient {
     }
   }
 
+  async fetchActivitiesForUser({ activityName }) {
+    return await this.request({ endpoint: `activity/${activityName}`})
+  }
+
+  async signupUser(credentials) {
+    return await this.request({ endpoint: `auth/register`, method: `POST`, data: credentials })
+  }
+
+  async loginUser(credentials) {
+    return await this.request({ endpoint: `auth/login`, method: `POST`, data: credentials })
+  }
+
+  async logoutUser() {
+    this.setToken(null)
+    localStorage.setItem(this.tokenName, "")
+  }
+
   
 }
 
