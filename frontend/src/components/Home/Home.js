@@ -10,6 +10,10 @@ import './Home.css'
 export default function Home() {
   const items = [
     {
+      name: "Planner",
+      image: planner
+    },
+    {
       name: "Fitness",
       image: fitness
     },
@@ -20,10 +24,6 @@ export default function Home() {
     {
       name: "Rest",
       image: rest
-    },
-    {
-      name: "Planner",
-      image: planner
     }
   ]
 
