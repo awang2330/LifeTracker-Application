@@ -10,6 +10,8 @@ import Sleep from '../Sleep/Sleep'
 import Signup from '../Signup/Signup'
 import Login from '../Login/Login'
 
+import CreateExercise from '../CreateExercise/CreateExercise'
+
 import './App.css'
 
 export default function App() {
@@ -27,6 +29,8 @@ export default function App() {
           <Route path='/sleep' element={ <Sleep appState={appState} user={appState?.user}/>} />
           <Route path='/signup' element={ <Signup setAppState={setAppState}/>} />
           <Route path='/login' element={ <Login setAppState={setAppState}/>} />
+
+          <Route path='/exercise/create' element={ <CreateExercise appState={appState} user={appState?.user}/>} />
         </Routes>
       </BrowserRouter>
     </div>

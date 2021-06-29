@@ -3,10 +3,10 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  font-family: 'Baloo 2', cursive;
   padding: 5px;
 }
-.Navbar a {
+.Navbar a, .logout-link {
+  font-family: 'Baloo 2', cursive;
   text-decoration: none;
   color: #000;
   margin: 5px 10px;
