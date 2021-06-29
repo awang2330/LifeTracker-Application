@@ -28,6 +28,22 @@ export default function App() {
     setErrors(null)
   }
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data } = await API.fetchUserFromToken()
+      if (data) {
+        setAppState((a) => ({...a, user: data.user}))
+      }
+    }
+
+    // only set token if it exists
+    const token = localStorage.getItem("life_tracker_token")
+    if (token) {
+      API.setToken(token)
+      fetchUser()
+    }
+  }, [])
+
   const handleUpdateExercise = ({ newExercise}) => {
     setExercises(oldExercises => [...oldExercises, newExercise])
   }
