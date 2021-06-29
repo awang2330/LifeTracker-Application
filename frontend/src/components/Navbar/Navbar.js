@@ -6,6 +6,7 @@ import './Navbar.css'
 export default function Navbar( { user, setAppState, handleLogout }) {
   const isAuthenticated = Boolean(user?.email)
 
+  
   return (
     <div className="Navbar">
       <Link to='/' className='home-link'>

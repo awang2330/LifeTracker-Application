@@ -25,6 +25,7 @@ export default function App() {
     await API.logoutUser()
     setAppState({})
     setErrors(null)
+    window.location.reload()
   }
 
   useEffect(() => {
@@ -43,7 +44,8 @@ export default function App() {
     }
   }, [])
 
-  const handleUpdateExercise = ({ newExercise}) => {
+  const handleUpdateExercise = async (newExercise) => {
+    console.log(newExercise)
     setExercises(oldExercises => [...oldExercises, newExercise])
   }
 
@@ -51,7 +53,7 @@ export default function App() {
     const fetchExercises = async () => {
       setIsLoading(true)
       const { data, error } = await API.fetchExercises()
-      if (data.listExercises) {
+      if (data?.listExercises) {
         setExercises(data.listExercises)
       }
       if (error) {

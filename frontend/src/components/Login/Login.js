@@ -41,6 +41,8 @@ export default function Login({ setAppState }) {
     }
 
     setIsLoading(false)
+    // reloads so correct activity renders
+    window.location.reload()
   }
 
   return (

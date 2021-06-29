@@ -8,15 +8,15 @@ import './Exercise.css'
 export default function Exercise({ user, setAppState, exercises = []}) {
   const isAuthenticated = Boolean(user?.email)
   console.log(exercises)
-  console.log(typeof(exercises))
+  console.log(exercises.length)
   return (
     <div className="Exercise">
       {isAuthenticated ? 
       <>
         <PageHeader sectionName='Exercise'/>
-        <Link className='exercise-btn' to='/activity/exercises'>Add Exercise</Link>
+        <Link className='exercise-btn' to='/exercise/create'>Add Exercise</Link>
         <div>
-          {exercises === [] ?
+          {exercises.length > 0 ?
             exercises.map((item) => (
               <div key={item.id} className='aty-card'>
                 <div className='aty-name'>{item.name}</div>

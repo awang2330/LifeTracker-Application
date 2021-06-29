@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
+import API from '../../services/apiClient'
 import './CreateExercise.css'
 
 export default function CreateExercise({ appState, user, handleUpdateExercise }) {
@@ -13,6 +14,7 @@ export default function CreateExercise({ appState, user, handleUpdateExercise })
     intensity: ''
   })
 
+
   const handleOnInputChange = (event) => {
     if (event.target.name === 'duration') {
       // check if integer
@@ -23,8 +25,20 @@ export default function CreateExercise({ appState, user, handleUpdateExercise })
     setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
   }
 
-  const handleOnSave = () => {
-    handleUpdateExercise(form)
+  const handleOnSave =  async () => {
+    const { data, error } = await API.createExercise({
+      name: form.name,
+      category: form.category,
+      duration: form.duration,
+      intensity: form.intensity
+    }) 
+    if (data?.newExercise) {
+      handleUpdateExercise(data.newExercise)
+    }
+    if (error) {
+      console.log(error)
+      setErrors(e => ({...e, error}))
+    }
     navigate('/exercise')
   }
 
