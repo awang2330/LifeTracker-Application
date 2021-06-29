@@ -31,16 +31,19 @@ input {
 button {
   border: none;
   background: transparent;
-  padding: 5px 10px;
-  font-size: 18px;
-  border-radius: 5px;
   cursor: pointer;
 }
 .login-btn {
   background-color: #dbb0a0;
+  padding: 5px 10px;
+  margin: 10px;
+  margin-bottom: 30px;
+  font-size: 18px;
+  font-family: 'Baloo 2', cursive;
+  border-radius: 5px;
 }
 .error {
   font-family: 'Crimson Text', serif;
-  color: #fcb500;
+  color: #db9d00;
   font-weight: 600;
 }

@@ -51,9 +51,9 @@ class User {
       throw new BadRequestError(`A user already exists with email: ${creds.email}`)
     }
 
-    const existingUsername = await User.fetchUserByEmail(creds.email)
+    const existingUsername = await User.fetchUserByUsername(creds.usermame)
     if (existingUsername) {
-      throw new BadRequestError(`A user already exists with email: ${creds.email}`)
+      throw new BadRequestError(`A user already exists with username: ${creds.username}`)
     }
 
     const hashedPassword = await bcrypt.hash(creds.password, BCRYPT_WORK_FACTOR)
@@ -70,13 +70,22 @@ class User {
     return User.makePublicUser(user)
   }
 
-
   static async fetchUserByEmail(email) {
     if (!email) {
       throw new BadRequestError("No email provided")
     }
     const query = `SELECT * FROM users WHERE email = $1`
     const result = await db.query(query, [email.toLowerCase()])
+    const user = result.rows[0]
+    return user
+  }
+
+  static async fetchUserByUsername(username) {
+    if (!username) {
+      throw new BadRequestError("No username provided")
+    }
+    const query = `SELECT * FROM users WHERE username = $1`
+    const result = await db.query(query, [username.toLowerCase()])
     const user = result.rows[0]
     return user
   }

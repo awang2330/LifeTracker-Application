@@ -11,3 +11,12 @@
   width: 45%;
   margin: 0;
 }
+.signup-btn {
+  background-color: #eab586;
+  padding: 5px 10px;
+  margin: 10px;
+  margin-bottom: 30px;
+  font-size: 18px;
+  font-family: 'Baloo 2', cursive;
+  border-radius: 5px;
+}

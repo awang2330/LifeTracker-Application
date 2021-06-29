@@ -93,8 +93,6 @@ export default function Signup({ setAppState }) {
     <div className="Signup">
       <PageHeader sectionName='Sign Up'/>
 
-      {errors.form && <span className="error">{errors.form}</span>}
-
       <div className='form'>
         <div className='form-fields'>
           <div className='form-input-name'>
@@ -132,7 +130,7 @@ export default function Signup({ setAppState }) {
           </div>
 
           {errors.form && <span className="error">{errors.form}</span>}
-          <button className='login-btn' onClick={handleOnSubmit}>Sign Up</button>
+          <button className='signup-btn' onClick={handleOnSubmit}>Signup</button>
         </div>
       </div>
     </div>
