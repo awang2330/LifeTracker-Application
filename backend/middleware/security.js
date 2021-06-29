@@ -32,7 +32,7 @@ const requireAuthenticateUser = (req, res, next) => {
   try {
     const { user } = res.locals
     if (!user?.username) {
-      throw new UnauthorizedError(``)
+      throw new UnauthorizedError(`No user logged in`)
     }
     return next()
   } catch(err) {

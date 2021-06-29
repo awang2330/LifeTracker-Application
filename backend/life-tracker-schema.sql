@@ -34,5 +34,6 @@ CREATE TABLE sleeps (
   id          SERIAL PRIMARY KEY,
   user_id     INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   start_date  TIMESTAMP NOT NULL,
-  end_date    TIMESTAMP NOT NULL CHECK (end_date > start_date)
+  end_date    TIMESTAMP NOT NULL CHECK (end_date > start_date),
+  date        TIMESTAMP NOT NULL DEFAULT NOW()
 );

@@ -3,7 +3,6 @@ const { BadRequestError, UnauthorizedError } = require('../utils/errors')
 
 class Activity {
   static async createExercise({ exercise, user }) {
-    console.log("exercise")
     if (!user) {
       throw new UnauthorizedError(`No user logged in.`)
     }
@@ -36,14 +35,44 @@ class Activity {
     )
 
     return results.rows[0]
-
   }
 
   static async createNutrition({ nutrition, user }) {
+    console.log("nutrtion")
     if (!user) {
       throw new UnauthorizedError(`No user logged in.`)
     }
 
+    const reqFields = ['name', 'category', 'quantity', 'calories', 'image_url']
+    reqFields.forEach(field => {
+      if (!nutrition.hasOwnProperty(field)) {
+        throw new BadRequestError(`Missing ${field} in request body.`)
+      }
+    })
+
+    const results = await db.query(`
+      INSERT INTO nutritions (user_id, name, category, quantity, calories, image_url)
+      VALUES ((SELECT id FROM users WHERE username = $1), $2, $3, $4, $5, $6)
+      RETURNING id,
+                user_id AS "userId",
+                name, 
+                category,
+                quantity,
+                calories,
+                image_url AS "imageUrl",
+                date;
+      `,
+      [
+        user.username,
+        nutrition.name,
+        nutrition.category,
+        nutrition.quantity,
+        nutrition.calories,
+        nutrition.image_url
+      ]
+    )
+
+    return results.rows[0]
   }
 
   static async createSleep({ sleep, user }) {
@@ -51,6 +80,30 @@ class Activity {
       throw new UnauthorizedError(`No user logged in.`)
     }
 
+    const reqFields = ['start_date', 'end_date']
+    reqFields.forEach(field => {
+      if (!sleep.hasOwnProperty(field)) {
+        throw new BadRequestError(`Missing ${field} in request body.`)
+      }
+    })
+
+    const results = await db.query(`
+      INSERT INTO sleeps (user_id, start_date, end_date)
+      VALUES ((SELECT id FROM users WHERE username = $1), $2, $3)
+      RETURNING id,
+                user_id AS "userId",
+                start_date AS "startDate",
+                end_date AS "endDate",
+                date;
+      `,
+      [
+        user.username,
+        new Date(sleep.start_date),
+        new Date(sleep.end_date)
+      ]
+    )
+
+    return results.rows[0]
   }
 }
 

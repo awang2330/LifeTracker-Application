@@ -6,7 +6,6 @@ const Activity =  require('../models/activity')
 
 router.post('/exercise', requireAuthenticateUser, async (req, res, next) => {
   try {
-    console.log('activity/exercise')
     const user = res.locals.user
     const exercise = req.body.exercise
     const newExercise = await Activity.createExercise({ exercise, user })
@@ -19,7 +18,6 @@ router.post('/exercise', requireAuthenticateUser, async (req, res, next) => {
 router.post('/nutrition', requireAuthenticateUser, async (req, res, next) => {
   try {
     const user = res.locals.user
-    console.log('user ', user)
     const nutrition = req.body.nutrition
     const newNutrition = await Activity.createNutrition({ nutrition, user })
     return res.status(201).json({ newNutrition })
