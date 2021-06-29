@@ -4,7 +4,7 @@ const morgan = require("morgan")
 const { PORT } = require("./config")
 const { NotFoundError } = require("./utils/errors")
 const authRouter = require('./routes/auth')
-const activtiyRouter = require('./routes/activity')
+const activityRouter = require('./routes/activity')
 const security = require('./middleware/security')
 
 const app = express()
@@ -17,7 +17,7 @@ app.use(security.extractUserFromJwt)
 
 app.use('/auth', authRouter)
 
-app.use('/activity', activtiyRouter)
+app.use('/activity', activityRouter)
 
 app.use((req, res, next) => {
   return next(new NotFoundError())

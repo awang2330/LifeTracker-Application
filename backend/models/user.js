@@ -51,7 +51,7 @@ class User {
       throw new BadRequestError(`A user already exists with email: ${creds.email}`)
     }
 
-    const existingUsername = await User.fetchUserByUsername(creds.usermame)
+    const existingUsername = await User.fetchUserByUsername(creds.username)
     if (existingUsername) {
       throw new BadRequestError(`A user already exists with username: ${creds.username}`)
     }

@@ -30,9 +30,10 @@ const extractUserFromJwt = (req, res, next) => {
 // create a function to verify a auth user
 const requireAuthenticateUser = (req, res, next) => {
   try {
+    console.log(res.locals)
     const { user } = res.locals
     if (user?.email) {
-      throw new UnauthorizedError()
+      throw new UnauthorizedError(``)
     }
     return next()
   } catch(err) {

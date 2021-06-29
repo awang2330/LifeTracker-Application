@@ -9,17 +9,17 @@ CREATE TABLE users (
   date        TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
-CREATE TABLE exercise (
+CREATE TABLE exercises (
   id          SERIAL PRIMARY KEY,
   user_id     INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   name        TEXT NOT NULL,
   category    TEXT NOT NULL,
   duration    TEXT NOT NULL,
-  intensity   INTEGER NOT NULL CHECK (1 <= intensity <= 10)
+  intensity   INTEGER NOT NULL CHECK (intensity BETWEEN 1 AND 10),
   date        TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
-CREATE TABLE nutrition (
+CREATE TABLE nutritions (
   id          SERIAL PRIMARY KEY,
   user_id     INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   name        TEXT NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE nutrition (
   date        TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
-CREATE TABLE sleep (
+CREATE TABLE sleeps (
   id          SERIAL PRIMARY KEY,
   user_id     INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   start_date  TIMESTAMP NOT NULL,
