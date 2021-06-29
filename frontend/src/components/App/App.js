@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
+import axios from 'axios'
 
 import Navbar from '../Navbar/Navbar'
 import Home from '../Home/Home'
@@ -13,9 +14,27 @@ import Login from '../Login/Login'
 import CreateExercise from '../CreateExercise/CreateExercise'
 
 import './App.css'
+import e from 'express'
 
 export default function App() {
   const [appState, setAppState] = useState({})
+  const [exercies, setExercises] = useState({})
+  const [errors, setErrors] = useState({})
+
+  useEffect(() => {
+    const fetchExercises = async () => {
+      try {
+        const req = await axios.get("http://localhost:3001/activity/exercises")
+        const exercises = req?.data?.exercises
+        if (exercises) {
+          setExercises(exercises)
+        }
+      } catch(err) {
+        setErrors(e => ({...e, err}))
+      }
+    }
+    fetchExercises()
+  }, [])
 
   return (
     <div className="App">
