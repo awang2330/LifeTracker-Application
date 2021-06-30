@@ -47,6 +47,14 @@ class ApiClient {
     return await this.request({ endpoint: `activity/nutrition`, method: `POST`, data: {nutrition: newNutrition}})
   }
 
+  async fetchSleeps() {
+    return await this.request({ endpoint: `activity/sleeps`})
+  }
+
+  async createSleep(newSleep) {
+    return await this.request({ endpoint: `activity/sleep`, method: `POST`, data: {sleep: newSleep}})
+  }
+
   async fetchUserFromToken() {
     return await this.request({ endpoint: `auth/me`})
   }

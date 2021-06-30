@@ -18,8 +18,6 @@ router.post('/exercise', requireAuthenticateUser, async (req, res, next) => {
   try {
     const user = res.locals.user
     const exercise = req.body.exercise
-    console.log("body ", req.body)
-    console.log(exercise)
     const newExercise = await Activity.createExercise({ exercise, user })
     return res.status(201).json({ newExercise })
   } catch (err) {
@@ -47,6 +45,17 @@ router.post('/nutrition', requireAuthenticateUser, async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/sleeps', requireAuthenticateUser, async (req, res, next) => {
+  try {
+    const user = res.locals.user
+    const listSleeps = await Activity.listSleeps({ user })
+    return res.status(201).json({ listSleeps })
+  } catch (err) {
+    next(err)
+  }
+})
+
 
 router.post('/sleep', requireAuthenticateUser, async (req, res, next) => {
   try {

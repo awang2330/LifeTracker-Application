@@ -12,6 +12,7 @@ import Login from '../Login/Login'
 
 import CreateExercise from '../CreateExercise/CreateExercise'
 import CreateNutrition from '../CreateNutrition/CreateNutrition'
+import CreateSleep from '../CreateSleep/CreateSleep'
 
 import './App.css'
 import API from '../../services/apiClient'
@@ -22,6 +23,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false)
   const [exercises, setExercises] = useState({}) 
   const [nutritions, setNutritions] = useState({}) 
+  const [sleeps, setSleeps] = useState({}) 
 
   const handleLogout = async () => {
     await API.logoutUser()
@@ -54,6 +56,10 @@ export default function App() {
     setNutritions(oldNutritions => [...oldNutritions, newNutrition])
   }
 
+  const handleUpdateSleep = async (newSleep) => {
+    setSleeps(oldSleeps => [...oldSleeps, newSleep])
+  }
+
   useEffect(() => {
     const fetchExercises = async () => {
       setIsLoading(true)
@@ -84,6 +90,21 @@ export default function App() {
     fetchNutritions()
   }, [])
 
+  useEffect(() => {
+    const fetchSleeps = async () => {
+      setIsLoading(true)
+      const { data, error } = await API.fetchSleeps()
+      if (data?.listSleeps) {
+        setSleeps(data.listSleeps)
+      }
+      if (error) {
+        setErrors((e) => ({ ...e, error }))
+      }
+      setIsLoading(false)
+    }
+    fetchSleeps()
+  }, [])
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -93,12 +114,13 @@ export default function App() {
           <Route path='/activity' element={ <Activity appState={appState} user={appState?.user}/>} />
           <Route path='/exercise' element={ <Exercise appState={appState} user={appState?.user} exercises={exercises}/>} />
           <Route path='/nutrition' element={ <Nutrition appState={appState} user={appState?.user} nutritions={nutritions}/>} />
-          <Route path='/sleep' element={ <Sleep appState={appState} user={appState?.user}/>} />
+          <Route path='/sleep' element={ <Sleep appState={appState} user={appState?.user} sleeps={sleeps}/>} />
           <Route path='/signup' element={ <Signup setAppState={setAppState}/>} />
           <Route path='/login' element={ <Login setAppState={setAppState}/>} />
 
           <Route path='/exercise/create' element={ <CreateExercise appState={appState} user={appState?.user} handleUpdateExercise={handleUpdateExercise}/>} />
           <Route path='/nutrition/create' element={ <CreateNutrition appState={appState} user={appState?.user} handleUpdateNutrition={handleUpdateNutrition}/>} />
+          <Route path='/sleep/create' element={ <CreateSleep appState={appState} user={appState?.user} handleUpdateSleep={handleUpdateSleep}/>} />
         </Routes>
       </BrowserRouter>
     </div>

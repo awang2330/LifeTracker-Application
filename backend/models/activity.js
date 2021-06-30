@@ -109,6 +109,23 @@ class Activity {
     return results.rows[0]
   }
 
+  /** Return a lsit of all sleeps of an user */
+  static async listSleeps({ user }) {
+    if (!user) {
+      throw new UnauthorizedError(`No user logged in.`)
+    }
+
+    const results = await db.query(`
+      SELECT id, user_id AS "userId", start_date AS "startDate", end_date AS "endDate", date
+      FROM sleeps
+      WHERE user_id = (
+        SELECT id FROM users WHERE username = $1
+      );
+    `, [user.username]
+    )
+    return results.rows
+  }
+
   static async createSleep({ sleep, user }) {
     if (!user) {
       throw new UnauthorizedError(`No user logged in.`)
