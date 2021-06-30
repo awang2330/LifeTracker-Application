@@ -47,6 +47,10 @@ class ApiClient {
     return await this.request({ endpoint: `activity/nutritions`})
   }
 
+  async fetchAvgCalories() {
+    return await this.request({ endpoint: `activity/nutritions/avg`})
+  }
+
   async createNutrition(newNutrition) {
     return await this.request({ endpoint: `activity/nutrition`, method: `POST`, data: {nutrition: newNutrition}})
   }

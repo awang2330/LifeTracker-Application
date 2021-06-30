@@ -72,6 +72,23 @@ class Activity {
     return results.rows[0]
   }
 
+  /** Fetch avg nutrition calories */
+  static async listAvgCalories({ user }) {
+    if (!user) {
+      throw new UnauthorizedError(`No user logged in.`)
+    }
+
+    const results = await db.query(`
+      SELECT AVG(calories) as "avgCalories"
+      FROM nutritions
+      WHERE user_id = (
+        SELECT id FROM users WHERE username = $1
+      );
+    `, [user.username]
+    )
+    return results.rows[0]
+  }
+
   /** Fetch a lsit of all nutritions of an user */
   static async listNutritions({ user }) {
     if (!user) {

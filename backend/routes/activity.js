@@ -4,9 +4,9 @@ const { requireAuthenticateUser } = require('../middleware/security')
 
 const Activity =  require('../models/activity')
 
+/** EXERCISE */
 router.get('/exercises/total', requireAuthenticateUser, async (req, res, next) => {
   try {
-    console.log("exercises/total")
     const user = res.locals.user
     const totalTime = await Activity.listTotalExerciseTime({ user })
     return res.status(201).json( totalTime )
@@ -36,6 +36,18 @@ router.post('/exercise', requireAuthenticateUser, async (req, res, next) => {
   }
 })
 
+
+/** NUTRITION */
+router.get('/nutritions/avg', requireAuthenticateUser, async (req, res, next) => {
+  try {
+    const user = res.locals.user
+    const avgCalories = await Activity.listAvgCalories({ user })
+    return res.status(201).json( avgCalories )
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get('/nutritions', requireAuthenticateUser, async (req, res, next) => {
   try {
     const user = res.locals.user
@@ -57,6 +69,8 @@ router.post('/nutrition', requireAuthenticateUser, async (req, res, next) => {
   }
 })
 
+
+/** SLEEP */
 router.get('/sleeps', requireAuthenticateUser, async (req, res, next) => {
   try {
     const user = res.locals.user

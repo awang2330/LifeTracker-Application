@@ -24,7 +24,8 @@ export default function App() {
   const [nutritions, setNutritions] = useState({}) 
   const [sleeps, setSleeps] = useState({}) 
   
-  const [totalExerciseTime, setTotalExerciseTime] = useState(Number(0))
+  const [totalExerciseTime, setTotalExerciseTime] = useState(0)
+  const [avgCalories, setAvgCalories] = useState(0)
 
   const handleLogout = async () => {
     await API.logoutUser()
@@ -51,11 +52,12 @@ export default function App() {
 
   const handleUpdateExercise = async (newExercise) => {
     setExercises(oldExercises => [...oldExercises, newExercise])
-    setTotalExerciseTime(t => t + Number(newExercise.duration))
+    // setTotalExerciseTime(t => t + Number(newExercise.duration))
   }
 
   const handleUpdateNutrition = async (newNutrition) => {
     setNutritions(oldNutritions => [...oldNutritions, newNutrition])
+    // setAvgCalories(a => a +)
   }
 
   const handleUpdateSleep = async (newSleep) => {
@@ -116,8 +118,23 @@ export default function App() {
       }
     }
     fetchExerciseTime()
-    console.log(totalExerciseTime)
-  }, [])
+  }, [exercises])
+
+  /** Fetch avg daily calories by user */
+   useEffect(() => {
+    const fetchAvgCalories = async () => {
+      const { data, error } = await API.fetchAvgCalories()
+      console.log(data)
+      if (data?.avgCalories) {
+        setAvgCalories(data.avgCalories)
+      }
+      if (error) {
+        setErrors((e) => ({ ...e, error }))
+      }
+    }
+    fetchAvgCalories()
+  }, [nutritions])
+
 
   
   return (
@@ -126,7 +143,7 @@ export default function App() {
         <Navbar setAppState={setAppState} user={appState?.user} handleLogout={handleLogout}/>
         <Routes>
           <Route path='/' element={ <Home/> }/>
-          <Route path='/activity' element={ <Activity appState={appState} user={appState?.user} totalExerciseTime={totalExerciseTime}/>} />
+          <Route path='/activity' element={ <Activity appState={appState} user={appState?.user} totalExerciseTime={totalExerciseTime} avgCalories={avgCalories}/>} />
           <Route path='/exercise' element={ <Exercise appState={appState} user={appState?.user} exercises={exercises}/>} />
           <Route path='/nutrition' element={ <Nutrition appState={appState} user={appState?.user} nutritions={nutritions}/>} />
           <Route path='/sleep' element={ <Sleep appState={appState} user={appState?.user} sleeps={sleeps}/>} />
