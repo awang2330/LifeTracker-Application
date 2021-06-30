@@ -91,7 +91,9 @@ export default function CreateExercise({ handleUpdateExercise }) {
             {errors.intensity && <span className="error">{errors.intensity}</span>}
           </div>
           {errors.form && <span className="error">{errors.form}</span>}
-          <button className='login-btn' onClick={handleOnSave}>Save</button>
+          <button className='login-btn' onClick={handleOnSave}>
+            {isLoading ? <>Loading</> : <>Save</>}
+          </button>
         </div>
       </div>
     </div>

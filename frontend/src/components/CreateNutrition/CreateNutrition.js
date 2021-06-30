@@ -69,7 +69,9 @@ export default function CreateNutrition({ handleUpdateNutrition  }) {
             <input type="text" name="imageUrl" placeholder="" value={form.image_url} onChange={handleOnInputChange}/>
           </div>
           {errors.form && <span className="error">{errors.form}</span>}
-          <button className='login-btn' onClick={handleOnSave}>Save</button>
+          <button className='login-btn' onClick={handleOnSave}>
+            {isLoading ? <>Loading</> : <>Save</>}
+          </button>
         </div>
       </div>
     </div>

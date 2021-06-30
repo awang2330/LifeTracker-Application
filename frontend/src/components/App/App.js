@@ -20,7 +20,6 @@ import API from '../../services/apiClient'
 export default function App() {
   const [appState, setAppState] = useState({})
   const [errors, setErrors] = useState({})
-  const [isLoading, setIsLoading] = useState(false)
   const [exercises, setExercises] = useState({}) 
   const [nutritions, setNutritions] = useState({}) 
   const [sleeps, setSleeps] = useState({}) 
@@ -29,9 +28,9 @@ export default function App() {
     await API.logoutUser()
     setAppState({})
     setErrors(null)
-    window.location.reload()
   }
 
+    /** Fetch user by token generated */
   useEffect(() => {
     const fetchUser = async () => {
       const { data } = await API.fetchUserFromToken()
@@ -60,9 +59,9 @@ export default function App() {
     setSleeps(oldSleeps => [...oldSleeps, newSleep])
   }
 
+  /** Fetch exercises for user */
   useEffect(() => {
     const fetchExercises = async () => {
-      setIsLoading(true)
       const { data, error } = await API.fetchExercises()
       if (data?.listExercises) {
         setExercises(data.listExercises)
@@ -70,14 +69,13 @@ export default function App() {
       if (error) {
         setErrors((e) => ({ ...e, error }))
       }
-      setIsLoading(false)
     }
     fetchExercises()
   }, [])
 
+  /** Fetch nutritions for user */
   useEffect(() => {
     const fetchNutritions = async () => {
-      setIsLoading(true)
       const { data, error } = await API.fetchNutritions()
       if (data?.listNutritions) {
         setNutritions(data.listNutritions)
@@ -85,14 +83,13 @@ export default function App() {
       if (error) {
         setErrors((e) => ({ ...e, error }))
       }
-      setIsLoading(false)
     }
     fetchNutritions()
   }, [])
 
+  /** Fetch sleeps by user */
   useEffect(() => {
     const fetchSleeps = async () => {
-      setIsLoading(true)
       const { data, error } = await API.fetchSleeps()
       if (data?.listSleeps) {
         setSleeps(data.listSleeps)
@@ -100,7 +97,6 @@ export default function App() {
       if (error) {
         setErrors((e) => ({ ...e, error }))
       }
-      setIsLoading(false)
     }
     fetchSleeps()
   }, [])

@@ -41,14 +41,16 @@ export default function CreateSleep({ handleUpdateSleep }) {
         <div className='form-fields'>
           <div className='form-input'>
             <label htmlFor='startTime'>Start date</label>
-            <input type='datetime-local' name='startTime' placeholder='' value={form.start_date}/>
+            <input type='datetime-local' name='startTime' placeholder='' value={form.start_date} onChange={handleOnInputChange}/>
           </div>
           <div className='form-input'>
             <label htmlFor='endTime'>End date</label>
-            <input type='datetime-local' name='endTime' placeholder='' value={form.end_date}/>
+            <input type='datetime-local' name='endTime' placeholder='' value={form.end_date} onChange={handleOnInputChange}/>
           </div>
           {errors.form && <span className="error">{errors.form}</span>}
-          <button className='login-btn' onClick={handleOnSave}>Save</button>
+          <button className='login-btn' onClick={handleOnSave}>
+            {isLoading ? <>Loading</> : <>Save</>}
+          </button>
         </div>
       </div>
     </div>
