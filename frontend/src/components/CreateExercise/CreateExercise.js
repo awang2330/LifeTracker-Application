@@ -16,33 +16,25 @@ export default function CreateExercise({ handleUpdateExercise }) {
   })
 
   const handleOnInputChange = (event) => {
-    // if (event.target.name === 'duration') {
-    //   if (event.target.value !== parseInt(event.target.value, 10)) {
-    //     setErrors((e) => ({ ...e, duration: "Please enter an integer" }))
-    //   }
-    //   else {
-    //     setErrors((e) => ({ ...e, duration: null }))
-    //   }
-    // }
-    // if (event.target.name === 'intensity') {
-    //   if (event.target.value !== parseInt(event.target.value, 10)) {
-    //     setErrors((e) => ({ ...e, intensity: "Please enter an integer value 1-10" }))
-    //   }
-    //   else {
-    //     setErrors((e) => ({ ...e, intensity: null }))
-    //   }
-    // }
     setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
   }
 
   const handleOnSave = async () => {
     setErrors({})
+    if (form.name === '') {
+      setErrors((e) => ({ ...e, name: "This field is required" }))
+      return
+    }
+    if (form.category === '') {
+      setErrors((e) => ({ ...e, category: "This field is required" }))
+      return
+    }
     if (form.duration === '') {
-      setErrors((e) => ({ ...e, form: "Invalid duration time" }))
+      setErrors((e) => ({ ...e, duration: "This field is required/Invalid duration time" }))
       return
     }
     if (form.intensity === '') {
-      setErrors((e) => ({ ...e, form: "Invalid intensity level" }))
+      setErrors((e) => ({ ...e, intensity: "This field is required/Invalid intensity level" }))
       return
     }
     if (form.intensity < 1 || form.intensity > 10) {
@@ -75,10 +67,12 @@ export default function CreateExercise({ handleUpdateExercise }) {
           <div className='form-input'>
             <label htmlFor='name'>Name</label>
             <input type='text' name='name' placeholder='Exercise name' value={form.name} onChange={handleOnInputChange}/>
+            {errors.name && <span className="error">{errors.name}</span>}
           </div>
           <div className='form-input'>
             <label htmlFor='category'>Category</label>
             <input type='text' name='category' placeholder='Exercise category' value={form.category} onChange={handleOnInputChange}/>
+            {errors.category && <span className="error">{errors.category}</span>}
           </div>
           <div className="form-input">
             <label htmlFor="duration">Duration (min)</label>

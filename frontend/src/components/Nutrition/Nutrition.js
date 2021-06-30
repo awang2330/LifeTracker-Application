@@ -6,6 +6,7 @@ import './Nutrition.css'
 export default function Nutrition({ user, setAppState, nutritions = [] }) {
   const isAuthenticated = Boolean(user?.email)
 
+  console.log(nutritions)
   return (
     <div className="Nutrition">
       {isAuthenticated ? 
@@ -20,13 +21,15 @@ export default function Nutrition({ user, setAppState, nutritions = [] }) {
             nutritions.map((item) => (
               <div key={item.id} className='aty-card'>
                 <div className='aty-type'>
+                  <div className='aty-img'>
+                    <img src={item.imageUrl} alt=''></img>
+                  </div>
                   <div className='aty-name'>{item.name}</div>
                   <div className='aty-category'>{item.category}</div>
                 </div>
                 <div className='aty-stats'>
-                  <div>Quantity:<span>{item.quantity}</span></div>
-                  <div>Calories:<span>{item.calories}</span></div>
-                  <img src={item.image_url} alt=''></img>
+                  <div>Quantity: <span>{item.quantity}</span></div>
+                  <div>Calories: <span>{item.calories}</span></div>
                 </div>
                 <div className='aty-meta'>
                   <div>{item.date}</div>

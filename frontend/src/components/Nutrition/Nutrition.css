@@ -1,0 +1,9 @@
+.aty-img {
+  overflow: hidden;
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+}
+.aty-img img {
+  width: 100%;
+}
