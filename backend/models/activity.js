@@ -55,6 +55,23 @@ class Activity {
     return results.rows[0]
   }
 
+  /** Return a lsit of all nutritions of an user */
+  static async listNutritions({ user }) {
+    if (!user) {
+      throw new UnauthorizedError(`No user logged in.`)
+    }
+
+    const results = await db.query(`
+      SELECT id, user_id AS "userId", name, category, quantity, calories, image_url AS "imageUrl", date
+      FROM nutritions
+      WHERE user_id = (
+        SELECT id FROM users WHERE username = $1
+      );
+    `, [user.username]
+    )
+    return results.rows
+  }
+  
   static async createNutrition({ nutrition, user }) {
     if (!user) {
       throw new UnauthorizedError(`No user logged in.`)

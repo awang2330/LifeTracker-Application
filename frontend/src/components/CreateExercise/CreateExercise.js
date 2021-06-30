@@ -4,7 +4,7 @@ import PageHeader from '../PageHeader/PageHeader'
 import API from '../../services/apiClient'
 import './CreateExercise.css'
 
-export default function CreateExercise({ appState, user, handleUpdateExercise }) {
+export default function CreateExercise({ handleUpdateExercise }) {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
   const [errors, setErrors] = useState({})

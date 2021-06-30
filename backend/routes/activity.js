@@ -27,6 +27,16 @@ router.post('/exercise', requireAuthenticateUser, async (req, res, next) => {
   }
 })
 
+router.get('/nutritions', requireAuthenticateUser, async (req, res, next) => {
+  try {
+    const user = res.locals.user
+    const listNutritions = await Activity.listNutritions({ user })
+    return res.status(201).json({ listNutritions })
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/nutrition', requireAuthenticateUser, async (req, res, next) => {
   try {
     const user = res.locals.user

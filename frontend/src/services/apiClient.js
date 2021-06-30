@@ -35,9 +35,16 @@ class ApiClient {
     return await this.request({ endpoint: `activity/exercises`})
   }
 
-  async createExercise(formResults) {
-    console.log(formResults)
-    return await this.request({ endpoint: `activity/exercise`, method: `POST`, data: {exercise: formResults}})
+  async createExercise(newExercise) {
+    return await this.request({ endpoint: `activity/exercise`, method: `POST`, data: {exercise: newExercise}})
+  }
+
+  async fetchNutritions() {
+    return await this.request({ endpoint: `activity/nutritions`})
+  }
+
+  async createNutrition(newNutrition) {
+    return await this.request({ endpoint: `activity/nutrition`, method: `POST`, data: {exercise: newNutrition}})
   }
 
   async fetchUserFromToken() {

@@ -20,6 +20,7 @@ export default function App() {
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const [exercises, setExercises] = useState({}) 
+  const [nutritions, setNutritions] = useState({}) 
 
   const handleLogout = async () => {
     await API.logoutUser()
@@ -45,7 +46,6 @@ export default function App() {
   }, [])
 
   const handleUpdateExercise = async (newExercise) => {
-    console.log(newExercise)
     setExercises(oldExercises => [...oldExercises, newExercise])
   }
 
@@ -64,6 +64,21 @@ export default function App() {
     fetchExercises()
   }, [])
 
+  useEffect(() => {
+    const fetchNutritions = async () => {
+      setIsLoading(true)
+      const { data, error } = await API.fetchNutritions()
+      if (data?.listNutritions) {
+        setNutritions(data.listNutritions)
+      }
+      if (error) {
+        setErrors((e) => ({ ...e, error }))
+      }
+      setIsLoading(false)
+    }
+    fetchNutritions()
+  }, [])
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -72,7 +87,7 @@ export default function App() {
           <Route path='/' element={ <Home/> }/>
           <Route path='/activity' element={ <Activity appState={appState} user={appState?.user}/>} />
           <Route path='/exercise' element={ <Exercise appState={appState} user={appState?.user} exercises={exercises}/>} />
-          <Route path='/nutrition' element={ <Nutrition appState={appState} user={appState?.user}/>} />
+          <Route path='/nutrition' element={ <Nutrition appState={appState} user={appState?.user} nutritions={nutritions}/>} />
           <Route path='/sleep' element={ <Sleep appState={appState} user={appState?.user}/>} />
           <Route path='/signup' element={ <Signup setAppState={setAppState}/>} />
           <Route path='/login' element={ <Login setAppState={setAppState}/>} />
