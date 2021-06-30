@@ -71,7 +71,7 @@ class Activity {
     )
     return results.rows
   }
-  
+
   static async createNutrition({ nutrition, user }) {
     if (!user) {
       throw new UnauthorizedError(`No user logged in.`)

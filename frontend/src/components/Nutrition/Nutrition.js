@@ -24,8 +24,9 @@ export default function Nutrition({ user, setAppState, nutritions = [] }) {
                   <div className='aty-category'>{item.category}</div>
                 </div>
                 <div className='aty-stats'>
-                  <div>Duration:<span>{item.duration}</span></div>
-                  <div>Intensity:<span>{item.intensity}</span></div>
+                  <div>Quantity:<span>{item.quantity}</span></div>
+                  <div>Calories:<span>{item.calories}</span></div>
+                  <img src={item.image_url} alt=''></img>
                 </div>
                 <div className='aty-meta'>
                   <div>{item.date}</div>

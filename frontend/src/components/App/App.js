@@ -11,6 +11,7 @@ import Signup from '../Signup/Signup'
 import Login from '../Login/Login'
 
 import CreateExercise from '../CreateExercise/CreateExercise'
+import CreateNutrition from '../CreateNutrition/CreateNutrition'
 
 import './App.css'
 import API from '../../services/apiClient'
@@ -47,6 +48,10 @@ export default function App() {
 
   const handleUpdateExercise = async (newExercise) => {
     setExercises(oldExercises => [...oldExercises, newExercise])
+  }
+
+  const handleUpdateNutrition = async (newNutrition) => {
+    setNutritions(oldNutritions => [...oldNutritions, newNutrition])
   }
 
   useEffect(() => {
@@ -93,6 +98,7 @@ export default function App() {
           <Route path='/login' element={ <Login setAppState={setAppState}/>} />
 
           <Route path='/exercise/create' element={ <CreateExercise appState={appState} user={appState?.user} handleUpdateExercise={handleUpdateExercise}/>} />
+          <Route path='/nutrition/create' element={ <CreateNutrition appState={appState} user={appState?.user} handleUpdateNutrition={handleUpdateNutrition}/>} />
         </Routes>
       </BrowserRouter>
     </div>

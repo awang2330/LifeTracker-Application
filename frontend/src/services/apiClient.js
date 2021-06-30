@@ -44,7 +44,7 @@ class ApiClient {
   }
 
   async createNutrition(newNutrition) {
-    return await this.request({ endpoint: `activity/nutrition`, method: `POST`, data: {exercise: newNutrition}})
+    return await this.request({ endpoint: `activity/nutrition`, method: `POST`, data: {nutrition: newNutrition}})
   }
 
   async fetchUserFromToken() {

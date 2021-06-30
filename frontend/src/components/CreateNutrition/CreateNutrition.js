@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import PageHeader from '../PageHeader/PageHeader'
 import API from '../../services/apiClient'
-import './createNutrition.css'
+import './CreateNutrition.css'
 
 export default function CreateNutrition({ handleUpdateNutrition  }) {
   const navigate = useNavigate()
@@ -11,8 +11,9 @@ export default function CreateNutrition({ handleUpdateNutrition  }) {
   const [form, setForm] = useState({
     name: '',
     category: '',
-    duration: '',
-    intensity: ''
+    quantity: '',
+    calories: '',
+    imageUrl: ''
   })
 
   const handleOnInputChange = (event) => {
@@ -25,8 +26,9 @@ export default function CreateNutrition({ handleUpdateNutrition  }) {
     const { data, error } = await API.createNutrition({
       name: form.name,
       category: form.category,
-      duration: form.duration,
-      intensity: form.intensity
+      quantity: form.quantity,
+      calories: form.calories,
+      image_url: form.imageUrl
     }) 
     if (data?.newNutrition) {
       handleUpdateNutrition(data.newNutrition)
@@ -53,14 +55,18 @@ export default function CreateNutrition({ handleUpdateNutrition  }) {
             <input type='text' name='category' placeholder='Nutrition category' value={form.category} onChange={handleOnInputChange}/>
           </div>
           <div className="form-input">
-            <label htmlFor="duration">Duration (min)</label>
-            <input type="number" name="duration" min="1" max="100000000" value={form.duration} onChange={handleOnInputChange}/>
-            {errors.duration && <span className="error">{errors.duration}</span>}
+            <label htmlFor="quantity">Quantity</label>
+            <input type="number" name="quantity" min="1" max="100000000" value={form.quantity} onChange={handleOnInputChange}/>
+            {errors.quantity && <span className="error">{errors.quantity}</span>}
           </div>
           <div className="form-input">
-            <label htmlFor="intensity">Intensity (1-10)</label>
-            <input type="number" name="intensity" min="1" max="10" value={form.intensity} onChange={handleOnInputChange}/>
-            {errors.intensity && <span className="error">{errors.intensity}</span>}
+            <label htmlFor="calories">Calories</label>
+            <input type="number" name="calories" min="1" max="100000000" value={form.calories} onChange={handleOnInputChange}/>
+            {errors.calories && <span className="error">{errors.calories}</span>}
+          </div>
+          <div className="form-input">
+            <label htmlFor="imageUrl">Image URL</label>
+            <input type="text" name="imageUrl" placeholder="" value={form.image_url} onChange={handleOnInputChange}/>
           </div>
           {errors.form && <span className="error">{errors.form}</span>}
           <button className='login-btn' onClick={handleOnSave}>Save</button>
