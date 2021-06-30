@@ -9,15 +9,14 @@ class Activity {
     }
 
     const results = await db.query(`
-      SELECT id, user_id AS "userId", name, category, SUM(duration), intensity, date
+      SELECT SUM(duration) as "totalTime"
       FROM exercises
       WHERE user_id = (
         SELECT id FROM users WHERE username = $1
       );
     `, [user.username]
     )
-    console.log(results.rows)
-    return results.rows
+    return results.rows[0]
   }
 
   /** Fetch a lsit of all exercises of an user */

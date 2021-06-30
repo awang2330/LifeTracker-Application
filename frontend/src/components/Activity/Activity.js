@@ -16,7 +16,7 @@ export default function Activity({ user, setAppState, totalExerciseTime }) {
         <Link to='/nutrition/create' className='nutrition-btn'>Add Nutrition</Link>
         <Link to='/sleep/create' className='sleep-btn'>Add Sleep</Link>
       </div>
-      {totalExerciseTime !== 0 ?
+      {totalExerciseTime > 0 ?
         <div className='aty-card'>
           <div className='aty-stats'>
             <div>Total Exercise Time (minutes): <span>{totalExerciseTime}</span></div>

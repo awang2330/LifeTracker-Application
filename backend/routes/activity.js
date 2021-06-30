@@ -6,9 +6,10 @@ const Activity =  require('../models/activity')
 
 router.get('/exercises/total', requireAuthenticateUser, async (req, res, next) => {
   try {
+    console.log("exercises/total")
     const user = res.locals.user
     const totalTime = await Activity.listTotalExerciseTime({ user })
-    return res.status(201).json({ totalTime })
+    return res.status(201).json( totalTime )
   } catch (err) {
     next(err)
   }

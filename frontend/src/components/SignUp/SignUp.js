@@ -76,15 +76,17 @@ export default function Signup({ setAppState }) {
     if (data) {
       setAppState((a) => ({...a, user: data.user}))
       API.setToken(data.token)
-      navigate("/activity")
-      // reloads so correct activity renders
-      window.location.reload()
     }
     if (error) {
       setErrors((e) => ({ ...e, form: error }))
+      setIsLoading(false)
+      return
     }
 
     setIsLoading(false)
+    navigate("/activity")
+    // reloads so correct activity renders
+    window.location.reload()
   }
 
   return (

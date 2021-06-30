@@ -50,12 +50,8 @@ export default function App() {
   }, [])
 
   const handleUpdateExercise = async (newExercise) => {
-    try {
-      setExercises(oldExercises => [...oldExercises, newExercise])
-      setTotalExerciseTime(t => t + Number(newExercise.duration))
-    } catch(err) {
-      console.log(err)
-    }
+    setExercises(oldExercises => [...oldExercises, newExercise])
+    setTotalExerciseTime(t => t + Number(newExercise.duration))
   }
 
   const handleUpdateNutrition = async (newNutrition) => {
@@ -72,9 +68,6 @@ export default function App() {
       const { data, error } = await API.fetchExercises()
       if (data?.listExercises) {
         setExercises(data.listExercises)
-        data.listExercises.forEach(element => {
-          setTotalExerciseTime(t => t + Number(element.duration))
-        });
       }
       if (error) {
         setErrors((e) => ({ ...e, error }))
@@ -111,20 +104,20 @@ export default function App() {
     fetchSleeps()
   }, [])
 
-  //  /** Fetch total exercise time by user */
-  //  useEffect(() => {
-  //   const fetchExerciseTime = async () => {
-  //     const { data, error } = await API.fetchTotalExerciseTime()
-  //     console.log(data)
-  //     if (data?.totalTime) {
-  //       setTotalExerciseTime(data.totalTime)
-  //     }
-  //     if (error) {
-  //       setErrors((e) => ({ ...e, error }))
-  //     }
-  //   }
-  //   fetchExerciseTime()
-  // }, [])
+   /** Fetch total exercise time by user */
+   useEffect(() => {
+    const fetchExerciseTime = async () => {
+      const { data, error } = await API.fetchTotalExerciseTime()
+      if (data?.totalTime) {
+        setTotalExerciseTime(data.totalTime)
+      }
+      if (error) {
+        setErrors((e) => ({ ...e, error }))
+      }
+    }
+    fetchExerciseTime()
+    console.log(totalExerciseTime)
+  }, [])
 
   
   return (
