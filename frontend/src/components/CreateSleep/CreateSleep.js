@@ -9,20 +9,25 @@ export default function CreateSleep({ handleUpdateSleep }) {
   const [isLoading, setIsLoading] = useState(false)
   const [errors, setErrors] = useState({})
   const [form, setForm] = useState({
-    start_date: '',
-    end_date: ''
+    startDate: '',
+    endDate: ''
   })
 
   const handleOnInputChange = (event) => {
+    console.log(event.target)
+    console.log(event.target.name)
+    console.log(event.target.value)
     setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
+    console.log(form)
   }
 
   const handleOnSave = async () => {
     setErrors({})
     setIsLoading(true)
+
     const { data, error } = await API.createSleep({
-      start_date: form.start_date,
-      end_date: form.end_date,
+      start_date: form.startDate,
+      end_date: form.endDate,
     }) 
     if (data?.newSleep) {
       handleUpdateSleep(data.newSleep)
@@ -41,11 +46,11 @@ export default function CreateSleep({ handleUpdateSleep }) {
         <div className='form-fields'>
           <div className='form-input'>
             <label htmlFor='startTime'>Start date</label>
-            <input type='datetime-local' name='startTime' placeholder='' value={form.start_date} onChange={handleOnInputChange}/>
+            <input type='datetime-local' name='startDate' value={form.startDate} onChange={handleOnInputChange}/>
           </div>
           <div className='form-input'>
             <label htmlFor='endTime'>End date</label>
-            <input type='datetime-local' name='endTime' placeholder='' value={form.end_date} onChange={handleOnInputChange}/>
+            <input type='datetime-local' name='endDate' value={form.endDate} onChange={handleOnInputChange}/>
           </div>
           {errors.form && <span className="error">{errors.form}</span>}
           <button className='login-btn' onClick={handleOnSave}>

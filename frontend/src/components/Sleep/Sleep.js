@@ -20,8 +20,8 @@ export default function Sleep({ user, setAppState, sleeps = [] }) {
             sleeps.map((item) => (
               <div key={item.id} className='aty-card'>
                 <div className='aty-stats'>
-                  <div>Start date:<span>{item.start_date}</span></div>
-                  <div>End date:<span>{item.end_date}</span></div>
+                  <div>Start date: <span>{item.startDate}</span></div>
+                  <div>End date: <span>{item.endDate}</span></div>
                 </div>
                 <div className='aty-meta'>
                   <div>{item.date}</div>

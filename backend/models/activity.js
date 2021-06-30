@@ -171,6 +171,7 @@ class Activity {
         throw new BadRequestError(`Missing ${field} in request body.`)
       }
     })
+    console.log(sleep)
 
     const results = await db.query(`
       INSERT INTO sleeps (user_id, start_date, end_date)
@@ -187,7 +188,7 @@ class Activity {
         new Date(sleep.end_date)
       ]
     )
-
+    console.log("results",results.rows[0])
     return results.rows[0]
   }
 }

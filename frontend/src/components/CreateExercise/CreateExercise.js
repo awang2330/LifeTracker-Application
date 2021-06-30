@@ -38,7 +38,7 @@ export default function CreateExercise({ handleUpdateExercise }) {
       return
     }
     if (form.intensity < 1 || form.intensity > 10) {
-      setErrors((e) => ({ ...e, form: "Intensity must be in range 1-10" }))
+      setErrors((e) => ({ ...e, intensity: "Intensity must be in range 1-10" }))
       return
     }
     setIsLoading(true)

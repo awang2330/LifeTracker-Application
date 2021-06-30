@@ -124,7 +124,6 @@ export default function App() {
    useEffect(() => {
     const fetchAvgCalories = async () => {
       const { data, error } = await API.fetchAvgCalories()
-      console.log(data)
       if (data?.avgCalories) {
         setAvgCalories(data.avgCalories)
       }
