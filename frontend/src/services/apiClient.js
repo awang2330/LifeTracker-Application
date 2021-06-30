@@ -35,6 +35,10 @@ class ApiClient {
     return await this.request({ endpoint: `activity/exercises`})
   }
 
+  async fetchTotalExerciseTime() {
+    return await this.request({ endpoint: `activity/exercises/total`})
+  }
+
   async createExercise(newExercise) {
     return await this.request({ endpoint: `activity/exercise`, method: `POST`, data: {exercise: newExercise}})
   }

@@ -23,6 +23,8 @@ export default function App() {
   const [exercises, setExercises] = useState({}) 
   const [nutritions, setNutritions] = useState({}) 
   const [sleeps, setSleeps] = useState({}) 
+  
+  const [totalExerciseTime, setTotalExerciseTime] = useState(0)
 
   const handleLogout = async () => {
     await API.logoutUser()
@@ -101,13 +103,29 @@ export default function App() {
     fetchSleeps()
   }, [])
 
+   /** Fetch total exercise time by user */
+   useEffect(() => {
+    const fetchExerciseTime = async () => {
+      const { data, error } = await API.fetchTotalExerciseTime()
+      console.log(data)
+      if (data?.totalTime) {
+        setTotalExerciseTime(data.totalTime)
+      }
+      if (error) {
+        setErrors((e) => ({ ...e, error }))
+      }
+    }
+    fetchExerciseTime()
+  }, [])
+
+  
   return (
     <div className="App">
       <BrowserRouter>
         <Navbar setAppState={setAppState} user={appState?.user} handleLogout={handleLogout}/>
         <Routes>
           <Route path='/' element={ <Home/> }/>
-          <Route path='/activity' element={ <Activity appState={appState} user={appState?.user}/>} />
+          <Route path='/activity' element={ <Activity appState={appState} user={appState?.user} totalExerciseTime={totalExerciseTime}/>} />
           <Route path='/exercise' element={ <Exercise appState={appState} user={appState?.user} exercises={exercises}/>} />
           <Route path='/nutrition' element={ <Nutrition appState={appState} user={appState?.user} nutritions={nutritions}/>} />
           <Route path='/sleep' element={ <Sleep appState={appState} user={appState?.user} sleeps={sleeps}/>} />

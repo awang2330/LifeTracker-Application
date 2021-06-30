@@ -2,7 +2,25 @@ const db = require('../db')
 const { BadRequestError, UnauthorizedError } = require('../utils/errors')
 
 class Activity {
-  /** Return a lsit of all exercises of an user */
+  /** Fetch total exercise time */
+  static async listTotalExerciseTime({ user }) {
+    if (!user) {
+      throw new UnauthorizedError(`No user logged in.`)
+    }
+
+    const results = await db.query(`
+      SELECT id, user_id AS "userId", name, category, SUM(duration), intensity, date
+      FROM exercises
+      WHERE user_id = (
+        SELECT id FROM users WHERE username = $1
+      );
+    `, [user.username]
+    )
+    console.log(results.rows)
+    return results.rows
+  }
+
+  /** Fetch a lsit of all exercises of an user */
   static async listExercises({ user }) {
     if (!user) {
       throw new UnauthorizedError(`No user logged in.`)
@@ -55,7 +73,7 @@ class Activity {
     return results.rows[0]
   }
 
-  /** Return a lsit of all nutritions of an user */
+  /** Fetch a lsit of all nutritions of an user */
   static async listNutritions({ user }) {
     if (!user) {
       throw new UnauthorizedError(`No user logged in.`)
@@ -109,7 +127,7 @@ class Activity {
     return results.rows[0]
   }
 
-  /** Return a lsit of all sleeps of an user */
+  /** Fetch a lsit of all sleeps of an user */
   static async listSleeps({ user }) {
     if (!user) {
       throw new UnauthorizedError(`No user logged in.`)
