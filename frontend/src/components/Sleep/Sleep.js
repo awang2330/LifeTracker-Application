@@ -20,11 +20,11 @@ export default function Sleep({ user, setAppState, sleeps = [] }) {
             sleeps.map((item) => (
               <div key={item.id} className='aty-card'>
                 <div className='aty-stats'>
-                  <div>Start date: <span>{item.startDate}</span></div>
-                  <div>End date: <span>{item.endDate}</span></div>
+                  <div>Start date: <span>{new Date(item.startDate).toLocaleString()}</span></div>
+                  <div>End date: <span>{new Date(item.endDate).toLocaleString()}</span></div>
                 </div>
                 <div className='aty-meta'>
-                  <div>{item.date}</div>
+                  <div>{new Date(item.date).toLocaleString()}</div>
                 </div>
               </div>
             )) : <div>No data yet</div>

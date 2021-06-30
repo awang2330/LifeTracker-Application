@@ -17,6 +17,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 .aty-card {
   display: flex;
@@ -27,6 +28,7 @@
   padding: 16px 32px;
   background-color: #fff;
   border-radius: 20px;
+  margin: 20px;
 }
 .aty-type {
   display: flex;

@@ -6,7 +6,6 @@ import './Nutrition.css'
 export default function Nutrition({ user, setAppState, nutritions = [] }) {
   const isAuthenticated = Boolean(user?.email)
 
-  console.log(nutritions)
   return (
     <div className="Nutrition">
       {isAuthenticated ? 
@@ -32,7 +31,7 @@ export default function Nutrition({ user, setAppState, nutritions = [] }) {
                   <div>Calories: <span>{item.calories}</span></div>
                 </div>
                 <div className='aty-meta'>
-                  <div>{item.date}</div>
+                  <div>{new Date(item.date).toLocaleString()}</div>
                 </div>
               </div>
             )) : <div>No data yet</div>

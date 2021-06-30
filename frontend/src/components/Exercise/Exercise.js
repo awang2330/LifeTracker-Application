@@ -5,6 +5,9 @@ import './Exercise.css'
 
 export default function Exercise({ user, setAppState, exercises = []}) {
   const isAuthenticated = Boolean(user?.email)
+  var d = new Date();
+  d = d.toUTCString()
+  console.log(d)
   return (
     <div className="Exercise">
       {isAuthenticated ? 
@@ -23,11 +26,11 @@ export default function Exercise({ user, setAppState, exercises = []}) {
                   <div className='aty-category'>{item.category}</div>
                 </div>
                 <div className='aty-stats'>
-                  <div>Duration:<span>{item.duration}</span></div>
-                  <div>Intensity:<span>{item.intensity}</span></div>
+                  <div>Duration: <span>{item.duration}</span></div>
+                  <div>Intensity: <span>{item.intensity}</span></div>
                 </div>
                 <div className='aty-meta'>
-                  <div>{item.date}</div>
+                  <div>{new Date(item.date).toLocaleString()}</div>
                 </div>
               </div>
             )) : <div>No data yet</div>
