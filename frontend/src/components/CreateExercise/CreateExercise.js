@@ -15,18 +15,40 @@ export default function CreateExercise({ appState, user, handleUpdateExercise })
     intensity: ''
   })
 
-
   const handleOnInputChange = (event) => {
-    if (event.target.name === 'duration') {
-      // check if integer
-    }
-    if (event.target.name === 'intensity') {
-      // check if integer and range
-    }
+    // if (event.target.name === 'duration') {
+    //   if (event.target.value !== parseInt(event.target.value, 10)) {
+    //     setErrors((e) => ({ ...e, duration: "Please enter an integer" }))
+    //   }
+    //   else {
+    //     setErrors((e) => ({ ...e, duration: null }))
+    //   }
+    // }
+    // if (event.target.name === 'intensity') {
+    //   if (event.target.value !== parseInt(event.target.value, 10)) {
+    //     setErrors((e) => ({ ...e, intensity: "Please enter an integer value 1-10" }))
+    //   }
+    //   else {
+    //     setErrors((e) => ({ ...e, intensity: null }))
+    //   }
+    // }
     setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
   }
 
-  const handleOnSave =  async () => {
+  const handleOnSave = async () => {
+    setErrors({})
+    if (form.duration === '') {
+      setErrors((e) => ({ ...e, form: "Invalid duration time" }))
+      return
+    }
+    if (form.intensity === '') {
+      setErrors((e) => ({ ...e, form: "Invalid intensity level" }))
+      return
+    }
+    if (form.intensity < 1 || form.intensity > 10) {
+      setErrors((e) => ({ ...e, form: "Intensity must be in range 1-10" }))
+      return
+    }
     setIsLoading(true)
     const { data, error } = await API.createExercise({
       name: form.name,
@@ -61,11 +83,13 @@ export default function CreateExercise({ appState, user, handleUpdateExercise })
           <div className="form-input">
             <label htmlFor="duration">Duration (min)</label>
             <input type="number" name="duration" min="1" max="100000000" value={form.duration} onChange={handleOnInputChange}/>
-           </div>
-           <div className="form-input">
+            {errors.duration && <span className="error">{errors.duration}</span>}
+          </div>
+          <div className="form-input">
             <label htmlFor="intensity">Intensity (1-10)</label>
             <input type="number" name="intensity" min="1" max="10" value={form.intensity} onChange={handleOnInputChange}/>
-           </div>
+            {errors.intensity && <span className="error">{errors.intensity}</span>}
+          </div>
           {errors.form && <span className="error">{errors.form}</span>}
           <button className='login-btn' onClick={handleOnSave}>Save</button>
         </div>

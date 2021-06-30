@@ -35,14 +35,14 @@ export default function Login({ setAppState }) {
       setAppState((a) => ({...a, user: data.user}))
       API.setToken(data.token)
       navigate("/activity")
+      // reloads so correct activity renders
+      window.location.reload()
     }
     if (error) {
+      console.log(errors)
       setErrors((e) => ({ ...e, form: error }))
     }
-
     setIsLoading(false)
-    // reloads so correct activity renders
-    window.location.reload()
   }
 
   return (
