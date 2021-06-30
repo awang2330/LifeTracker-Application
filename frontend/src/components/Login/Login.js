@@ -60,7 +60,9 @@ export default function Login({ setAppState }) {
             <input type='password' name='password' placeholder='*********' value={form.password} onChange={handleOnInputChange}/>
           </div>
           {errors.form && <span className="error">{errors.form}</span>}
-          <button className='login-btn' onClick={handleOnSubmit}>Login</button>
+          <button className='login-btn' onClick={handleOnSubmit}>
+            {isLoading ? <>Loading</> : <>Login</>}
+          </button>
         </div>
       </div>
       <div className='login-footer'>

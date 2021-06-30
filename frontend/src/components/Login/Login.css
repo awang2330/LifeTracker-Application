@@ -42,8 +42,12 @@ button {
   font-family: 'Baloo 2', cursive;
   border-radius: 5px;
 }
+.login-btn:hover {
+  background-color: #ebc0b1;
+}
 .error {
   font-family: 'Crimson Text', serif;
   color: #db9d00;
   font-weight: 600;
 }
+

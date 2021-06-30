@@ -24,7 +24,7 @@ export default function App() {
   const [nutritions, setNutritions] = useState({}) 
   const [sleeps, setSleeps] = useState({}) 
   
-  const [totalExerciseTime, setTotalExerciseTime] = useState(0)
+  const [totalExerciseTime, setTotalExerciseTime] = useState(Number(0))
 
   const handleLogout = async () => {
     await API.logoutUser()
@@ -50,7 +50,12 @@ export default function App() {
   }, [])
 
   const handleUpdateExercise = async (newExercise) => {
-    setExercises(oldExercises => [...oldExercises, newExercise])
+    try {
+      setExercises(oldExercises => [...oldExercises, newExercise])
+      setTotalExerciseTime(t => t + Number(newExercise.duration))
+    } catch(err) {
+      console.log(err)
+    }
   }
 
   const handleUpdateNutrition = async (newNutrition) => {
@@ -67,6 +72,9 @@ export default function App() {
       const { data, error } = await API.fetchExercises()
       if (data?.listExercises) {
         setExercises(data.listExercises)
+        data.listExercises.forEach(element => {
+          setTotalExerciseTime(t => t + Number(element.duration))
+        });
       }
       if (error) {
         setErrors((e) => ({ ...e, error }))
@@ -103,20 +111,20 @@ export default function App() {
     fetchSleeps()
   }, [])
 
-   /** Fetch total exercise time by user */
-   useEffect(() => {
-    const fetchExerciseTime = async () => {
-      const { data, error } = await API.fetchTotalExerciseTime()
-      console.log(data)
-      if (data?.totalTime) {
-        setTotalExerciseTime(data.totalTime)
-      }
-      if (error) {
-        setErrors((e) => ({ ...e, error }))
-      }
-    }
-    fetchExerciseTime()
-  }, [])
+  //  /** Fetch total exercise time by user */
+  //  useEffect(() => {
+  //   const fetchExerciseTime = async () => {
+  //     const { data, error } = await API.fetchTotalExerciseTime()
+  //     console.log(data)
+  //     if (data?.totalTime) {
+  //       setTotalExerciseTime(data.totalTime)
+  //     }
+  //     if (error) {
+  //       setErrors((e) => ({ ...e, error }))
+  //     }
+  //   }
+  //   fetchExerciseTime()
+  // }, [])
 
   
   return (

@@ -20,3 +20,6 @@
   font-family: 'Baloo 2', cursive;
   border-radius: 5px;
 }
+.signup-btn:hover {
+  background-color: #e9c09c;
+}

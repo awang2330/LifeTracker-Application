@@ -18,6 +18,7 @@ export default function Signup({ setAppState }) {
   })
 
   const handleOnInputChange = (event) => {
+    setErrors((e) => ({ ...e, form: null }))
     // check that password confirm is equal to password
     if (event.target.name === "password") {
       if (form.passwordConfirm && form.passwordConfirm !== event.target.value) {
@@ -76,6 +77,8 @@ export default function Signup({ setAppState }) {
       setAppState((a) => ({...a, user: data.user}))
       API.setToken(data.token)
       navigate("/activity")
+      // reloads so correct activity renders
+      window.location.reload()
     }
     if (error) {
       setErrors((e) => ({ ...e, form: error }))
@@ -125,7 +128,9 @@ export default function Signup({ setAppState }) {
           </div>
 
           {errors.form && <span className="error">{errors.form}</span>}
-          <button className='signup-btn' onClick={handleOnSubmit}>Signup</button>
+          <button className='signup-btn' onClick={handleOnSubmit}>
+            {isLoading ? <>Loading</> : <>Signup</>}
+          </button>
         </div>
       </div>
     </div>
