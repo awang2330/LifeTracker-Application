@@ -5,7 +5,7 @@ import API from '../../services/apiClient'
 import PageHeader from '../PageHeader/PageHeader'
 import './Login.css'
 
-export default function Login({ setAppState }) {
+export default function Login({handleLogIn, setAppState }) {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
   const [errors, setErrors] = useState({})
@@ -32,8 +32,8 @@ export default function Login({ setAppState }) {
 
     const { data, error } = await API.loginUser({ email: form.email, password: form.password })
     if (data) {
-      setAppState((a) => ({...a, user: data.user}))
       API.setToken(data.token)
+      setAppState((a) => ({...a, user: data.user}))
     }
     if (error) {
       console.log(errors)
@@ -43,8 +43,6 @@ export default function Login({ setAppState }) {
     }
     setIsLoading(false)
     navigate("/activity")
-    // // reloads so correct activity renders
-    // window.location.reload()
   }
 
   return (

@@ -71,6 +71,15 @@ router.post('/nutrition', requireAuthenticateUser, async (req, res, next) => {
 
 
 /** SLEEP */
+router.get('/sleeps/avg', requireAuthenticateUser, async (req, res, next) => {
+  try {
+    const user = res.locals.user
+    const avgSleepHours = await Activity.listAvgSleepHours({ user })
+    return res.status(201).json( avgSleepHours )
+  } catch (err) {
+    next(err)
+  }
+})
 router.get('/sleeps', requireAuthenticateUser, async (req, res, next) => {
   try {
     const user = res.locals.user

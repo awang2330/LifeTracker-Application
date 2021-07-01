@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import clock from '../../assets/risto_pekkala_Alarm_clock.svg'
 import './Navbar.css'
 
-export default function Navbar( { user, setAppState, handleLogout }) {
+export default function Navbar( { user, handleLogout }) {
   const isAuthenticated = Boolean(user?.email)
 
   return (

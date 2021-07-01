@@ -23,15 +23,19 @@ export default function App() {
   const [exercises, setExercises] = useState({}) 
   const [nutritions, setNutritions] = useState({}) 
   const [sleeps, setSleeps] = useState({}) 
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   
   const [totalExerciseTime, setTotalExerciseTime] = useState(0)
   const [avgCalories, setAvgCalories] = useState(0)
   const [avgSleepTime, setAvgSleepTime] = useState(0)
 
+  const handleLogIn = async () => {
+
+  }
   const handleLogout = async () => {
     await API.logoutUser()
     setAppState({})
+    console.log("app", appState)
     setErrors(null)
   }
 
@@ -39,6 +43,7 @@ export default function App() {
   useEffect(() => {
     const fetchUser = async () => {
       setIsLoading(true)
+      console.log("refresh")
       const { data } = await API.fetchUserFromToken()
       if (data) {
         setAppState((a) => ({...a, user: data.user}))
@@ -69,7 +74,6 @@ export default function App() {
   /** Fetch exercises for user */
   useEffect(() => {
     const fetchExercises = async () => {
-      setIsLoading(true)
       const { data, error } = await API.fetchExercises()
       if (data?.listExercises) {
         setExercises(data.listExercises)
@@ -77,15 +81,13 @@ export default function App() {
       if (error) {
         setErrors((e) => ({ ...e, error }))
       }
-      setIsLoading(false)
     }
     fetchExercises()
-  }, [appState.user])
+  }, [])
 
   /** Fetch nutritions for user */
   useEffect(() => {
     const fetchNutritions = async () => {
-      setIsLoading(true)
       const { data, error } = await API.fetchNutritions()
       if (data?.listNutritions) {
         setNutritions(data.listNutritions)
@@ -93,15 +95,13 @@ export default function App() {
       if (error) {
         setErrors((e) => ({ ...e, error }))
       }
-      setIsLoading(false)
     }
     fetchNutritions()
-  }, [appState.user])
+  }, [])
 
   /** Fetch sleeps by user */
   useEffect(() => {
     const fetchSleeps = async () => {
-      setIsLoading(true)
       const { data, error } = await API.fetchSleeps()
       if (data?.listSleeps) {
         setSleeps(data.listSleeps)
@@ -109,15 +109,13 @@ export default function App() {
       if (error) {
         setErrors((e) => ({ ...e, error }))
       }
-      setIsLoading(false)
     }
     fetchSleeps()
-  }, [appState.user])
+  }, [])
 
    /** Fetch total exercise time by user */
    useEffect(() => {
     const fetchExerciseTime = async () => {
-      setIsLoading(true)
       const { data, error } = await API.fetchTotalExerciseTime()
       if (data?.totalTime) {
         setTotalExerciseTime(data.totalTime)
@@ -125,15 +123,13 @@ export default function App() {
       if (error) {
         setErrors((e) => ({ ...e, error }))
       }
-      setIsLoading(false)
     }
     fetchExerciseTime()
-  }, [exercises])
+  }, [exercises, appState, isLoading])
 
   /** Fetch avg daily calories by user */
    useEffect(() => {
     const fetchAvgCalories = async () => {
-      setIsLoading(true)
       const { data, error } = await API.fetchAvgCalories()
       if (data?.avgCalories) {
         setAvgCalories(data.avgCalories)
@@ -141,16 +137,14 @@ export default function App() {
       if (error) {
         setErrors((e) => ({ ...e, error }))
       }
-      setIsLoading(false)
     }
     fetchAvgCalories()
-  }, [nutritions])
+  }, [nutritions, appState])
 
 
   /** Fetch avg sleep time by user */
   useEffect(() => {
     const fetchAvgSleepTime = async () => {
-      setIsLoading(true)
       const { data, error } = await API.fetchAvgSleepTime()
       if (data?.avgSleepHours) {
         setAvgSleepTime(data.avgSleepHours)
@@ -158,10 +152,9 @@ export default function App() {
       if (error) {
         setErrors((e) => ({ ...e, error }))
       }
-      setIsLoading(false)
     }
     fetchAvgSleepTime()
-  }, [sleeps])
+  }, [sleeps, appState])
 
   
   return (
@@ -169,15 +162,15 @@ export default function App() {
       <BrowserRouter>
         {!isLoading ? 
         <>
-        <Navbar setAppState={setAppState} user={appState?.user} handleLogout={handleLogout} isLoading={isLoading}/>
+        <Navbar user={appState?.user} handleLogout={handleLogout} isLoading={isLoading}/>
         <Routes>
           <Route path='/' element={ <Home/> }/>
           <Route path='/activity' element={ <Activity appState={appState} user={appState?.user} totalExerciseTime={totalExerciseTime} avgCalories={avgCalories} avgSleepTime={avgSleepTime}/>} />
           <Route path='/exercise' element={ <Exercise appState={appState} user={appState?.user} exercises={exercises}/>} />
           <Route path='/nutrition' element={ <Nutrition appState={appState} user={appState?.user} nutritions={nutritions}/>} />
           <Route path='/sleep' element={ <Sleep appState={appState} user={appState?.user} sleeps={sleeps}/>} />
-          <Route path='/signup' element={ <Signup setAppState={setAppState}/>} />
-          <Route path='/login' element={ <Login setAppState={setAppState}/>} />
+          <Route path='/signup' element={ <Signup handleLogIn={handleLogIn} setAppState={setAppState}/>} />
+          <Route path='/login' element={ <Login handleLogIn={handleLogIn} setAppState={setAppState}/>} />
 
           <Route path='/exercise/create' element={ <CreateExercise appState={appState} user={appState?.user} handleUpdateExercise={handleUpdateExercise}/>} />
           <Route path='/nutrition/create' element={ <CreateNutrition appState={appState} user={appState?.user} handleUpdateNutrition={handleUpdateNutrition}/>} />

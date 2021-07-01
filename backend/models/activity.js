@@ -19,7 +19,7 @@ class Activity {
     return results.rows[0]
   }
 
-  /** Fetch a lsit of all exercises of an user */
+  /** Fetch a list of all exercises of an user */
   static async listExercises({ user }) {
     if (!user) {
       throw new UnauthorizedError(`No user logged in.`)
@@ -143,6 +143,24 @@ class Activity {
     return results.rows[0]
   }
 
+  /** Fetch avg sleep time */
+  static async listAvgSleepHours({ user }) {
+    console.log("here")
+    if (!user) {
+      throw new UnauthorizedError(`No user logged in.`)
+    }
+    
+    const results = await db.query(`
+      SELECT AVG(Date(end_date) - Date(start_date)) as "avgSleepHours"
+      FROM sleeps
+      WHERE user_id = (
+        SELECT id FROM users WHERE username = $1
+      );
+    `, [user.username]
+    )
+    return results.rows[0]
+  }
+
   /** Fetch a lsit of all sleeps of an user */
   static async listSleeps({ user }) {
     if (!user) {
@@ -171,7 +189,6 @@ class Activity {
         throw new BadRequestError(`Missing ${field} in request body.`)
       }
     })
-    console.log(sleep)
 
     const results = await db.query(`
       INSERT INTO sleeps (user_id, start_date, end_date)
@@ -188,7 +205,6 @@ class Activity {
         new Date(sleep.end_date)
       ]
     )
-    console.log("results",results.rows[0])
     return results.rows[0]
   }
 }
