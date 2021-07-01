@@ -28,7 +28,7 @@ Deployed Application: [Lifetracker Deployed Site](ADD_LINK_HERE)
 
 Schema Table 
 
-<img src="/backend/life-tracker-schema.sql" alt="">
+[Schema Table Link](/backend/life-tracker-schema.sql) "Schema Table")
 
 ### Stretch Features
 
