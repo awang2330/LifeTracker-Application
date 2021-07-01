@@ -50,6 +50,18 @@ Activity: Exercise Unique Ids
 
 <img src="/frontend/src/assets/activity-id.gif" alt="">
 
+Tokens
+
+<img src="/frontend/src/assets/tokens.gif" alt="">
+
+Authentication 1
+
+<img src="/frontend/src/assets/authen1.gif" alt="">
+
+Authentication 2
+
+<img src="/frontend/src/assets/authen2.gif" alt="">
+
 ### Reflection
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
