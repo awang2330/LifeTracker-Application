@@ -42,6 +42,14 @@ User Register/Login/Logout
 
 <img src="/frontend/src/assets/ui login logout.gif" alt="">
 
+Activity: Exercise 
+
+<img src="/frontend/src/assets/activity.gif" alt="">
+
+Activity: Exercise Unique Ids
+
+<img src="/frontend/src/assets/activity-id.gif" alt="">
+
 ### Reflection
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
