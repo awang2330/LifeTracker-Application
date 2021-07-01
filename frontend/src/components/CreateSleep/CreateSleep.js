@@ -14,11 +14,7 @@ export default function CreateSleep({ handleUpdateSleep }) {
   })
 
   const handleOnInputChange = (event) => {
-    console.log(event.target)
-    console.log(event.target.name)
-    console.log(event.target.value)
     setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
-    console.log(form)
   }
 
   const handleOnSave = async () => {
