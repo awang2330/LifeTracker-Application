@@ -43,8 +43,8 @@ export default function Login({ setAppState }) {
     }
     setIsLoading(false)
     navigate("/activity")
-    // reloads so correct activity renders
-    window.location.reload()
+    // // reloads so correct activity renders
+    // window.location.reload()
   }
 
   return (

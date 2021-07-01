@@ -5,9 +5,6 @@ import './Exercise.css'
 
 export default function Exercise({ user, setAppState, exercises = []}) {
   const isAuthenticated = Boolean(user?.email)
-  var d = new Date();
-  d = d.toUTCString()
-  console.log(d)
   return (
     <div className="Exercise">
       {isAuthenticated ? 

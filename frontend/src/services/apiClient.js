@@ -59,6 +59,10 @@ class ApiClient {
     return await this.request({ endpoint: `activity/sleeps`})
   }
 
+  async fetchAvgSleepTime() {
+    return await this.request({ endpoint: `activity/sleeps/avg`})
+  }
+
   async createSleep(newSleep) {
     return await this.request({ endpoint: `activity/sleep`, method: `POST`, data: {sleep: newSleep}})
   }
@@ -79,8 +83,6 @@ class ApiClient {
     this.setToken(null)
     localStorage.setItem(this.tokenName, "")
   }
-
-  
 }
 
 const API = new ApiClient(process.env.REACT_APP_REMOTE_HOST_URL || "http://localhost:3001")

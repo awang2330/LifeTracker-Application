@@ -23,9 +23,11 @@ export default function App() {
   const [exercises, setExercises] = useState({}) 
   const [nutritions, setNutritions] = useState({}) 
   const [sleeps, setSleeps] = useState({}) 
+  const [isLoading, setIsLoading] = useState(true)
   
   const [totalExerciseTime, setTotalExerciseTime] = useState(0)
   const [avgCalories, setAvgCalories] = useState(0)
+  const [avgSleepTime, setAvgSleepTime] = useState(0)
 
   const handleLogout = async () => {
     await API.logoutUser()
@@ -36,10 +38,12 @@ export default function App() {
     /** Fetch user by token generated */
   useEffect(() => {
     const fetchUser = async () => {
+      setIsLoading(true)
       const { data } = await API.fetchUserFromToken()
       if (data) {
         setAppState((a) => ({...a, user: data.user}))
       }
+      setIsLoading(false)
     }
 
     // only set token if it exists
@@ -52,12 +56,10 @@ export default function App() {
 
   const handleUpdateExercise = async (newExercise) => {
     setExercises(oldExercises => [...oldExercises, newExercise])
-    // setTotalExerciseTime(t => t + Number(newExercise.duration))
   }
 
   const handleUpdateNutrition = async (newNutrition) => {
     setNutritions(oldNutritions => [...oldNutritions, newNutrition])
-    // setAvgCalories(a => a +)
   }
 
   const handleUpdateSleep = async (newSleep) => {
@@ -67,6 +69,7 @@ export default function App() {
   /** Fetch exercises for user */
   useEffect(() => {
     const fetchExercises = async () => {
+      setIsLoading(true)
       const { data, error } = await API.fetchExercises()
       if (data?.listExercises) {
         setExercises(data.listExercises)
@@ -74,13 +77,15 @@ export default function App() {
       if (error) {
         setErrors((e) => ({ ...e, error }))
       }
+      setIsLoading(false)
     }
     fetchExercises()
-  }, [])
+  }, [appState.user])
 
   /** Fetch nutritions for user */
   useEffect(() => {
     const fetchNutritions = async () => {
+      setIsLoading(true)
       const { data, error } = await API.fetchNutritions()
       if (data?.listNutritions) {
         setNutritions(data.listNutritions)
@@ -88,13 +93,15 @@ export default function App() {
       if (error) {
         setErrors((e) => ({ ...e, error }))
       }
+      setIsLoading(false)
     }
     fetchNutritions()
-  }, [])
+  }, [appState.user])
 
   /** Fetch sleeps by user */
   useEffect(() => {
     const fetchSleeps = async () => {
+      setIsLoading(true)
       const { data, error } = await API.fetchSleeps()
       if (data?.listSleeps) {
         setSleeps(data.listSleeps)
@@ -102,13 +109,15 @@ export default function App() {
       if (error) {
         setErrors((e) => ({ ...e, error }))
       }
+      setIsLoading(false)
     }
     fetchSleeps()
-  }, [])
+  }, [appState.user])
 
    /** Fetch total exercise time by user */
    useEffect(() => {
     const fetchExerciseTime = async () => {
+      setIsLoading(true)
       const { data, error } = await API.fetchTotalExerciseTime()
       if (data?.totalTime) {
         setTotalExerciseTime(data.totalTime)
@@ -116,6 +125,7 @@ export default function App() {
       if (error) {
         setErrors((e) => ({ ...e, error }))
       }
+      setIsLoading(false)
     }
     fetchExerciseTime()
   }, [exercises])
@@ -123,6 +133,7 @@ export default function App() {
   /** Fetch avg daily calories by user */
    useEffect(() => {
     const fetchAvgCalories = async () => {
+      setIsLoading(true)
       const { data, error } = await API.fetchAvgCalories()
       if (data?.avgCalories) {
         setAvgCalories(data.avgCalories)
@@ -130,19 +141,38 @@ export default function App() {
       if (error) {
         setErrors((e) => ({ ...e, error }))
       }
+      setIsLoading(false)
     }
     fetchAvgCalories()
   }, [nutritions])
 
 
+  /** Fetch avg sleep time by user */
+  useEffect(() => {
+    const fetchAvgSleepTime = async () => {
+      setIsLoading(true)
+      const { data, error } = await API.fetchAvgSleepTime()
+      if (data?.avgSleepHours) {
+        setAvgSleepTime(data.avgSleepHours)
+      }
+      if (error) {
+        setErrors((e) => ({ ...e, error }))
+      }
+      setIsLoading(false)
+    }
+    fetchAvgSleepTime()
+  }, [sleeps])
+
   
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar setAppState={setAppState} user={appState?.user} handleLogout={handleLogout}/>
+        {!isLoading ? 
+        <>
+        <Navbar setAppState={setAppState} user={appState?.user} handleLogout={handleLogout} isLoading={isLoading}/>
         <Routes>
           <Route path='/' element={ <Home/> }/>
-          <Route path='/activity' element={ <Activity appState={appState} user={appState?.user} totalExerciseTime={totalExerciseTime} avgCalories={avgCalories}/>} />
+          <Route path='/activity' element={ <Activity appState={appState} user={appState?.user} totalExerciseTime={totalExerciseTime} avgCalories={avgCalories} avgSleepTime={avgSleepTime}/>} />
           <Route path='/exercise' element={ <Exercise appState={appState} user={appState?.user} exercises={exercises}/>} />
           <Route path='/nutrition' element={ <Nutrition appState={appState} user={appState?.user} nutritions={nutritions}/>} />
           <Route path='/sleep' element={ <Sleep appState={appState} user={appState?.user} sleeps={sleeps}/>} />
@@ -153,6 +183,7 @@ export default function App() {
           <Route path='/nutrition/create' element={ <CreateNutrition appState={appState} user={appState?.user} handleUpdateNutrition={handleUpdateNutrition}/>} />
           <Route path='/sleep/create' element={ <CreateSleep appState={appState} user={appState?.user} handleUpdateSleep={handleUpdateSleep}/>} />
         </Routes>
+        </> : null }
       </BrowserRouter>
     </div>
   )

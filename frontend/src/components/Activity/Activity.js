@@ -3,7 +3,7 @@ import PageHeader from '../PageHeader/PageHeader'
 import Nouser from "../Nouser/Nouser"
 import './Activity.css'
 
-export default function Activity({ user, setAppState, totalExerciseTime, avgCalories = 0 }) {
+export default function Activity({ user, setAppState, totalExerciseTime = 0, avgCalories = 0, avgSleepTime = 0 }) {
   const isAuthenticated = Boolean(user?.email)
 
   return (
@@ -25,6 +25,11 @@ export default function Activity({ user, setAppState, totalExerciseTime, avgCalo
         <div className='aty-card'>
           <div className='aty-stats'>
             <div>Average Daily Calories: <span>{parseFloat(avgCalories).toFixed(2)}</span></div>
+          </div>
+        </div>
+        <div className='aty-card'>
+          <div className='aty-stats'>
+            <div>Average Sleep Hours: <span>{parseFloat(avgSleepTime).toFixed(2)}</span></div>
           </div>
         </div>
       </div>
