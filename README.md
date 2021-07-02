@@ -2,7 +2,7 @@
 
 Submitted by: **Ann Wang**
 
-Deployed Application: [Lifetracker Deployed Site](lifetracker-sun.surge.sh)
+Deployed Application: [Lifetracker Deployed Site](http://lifetracker-sun.surge.sh)
 
 ## Application Features
 
@@ -73,7 +73,7 @@ Authentication 2
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-I felt prepared to implement the majority of the features by looking through the labs. However, it was a bit difficult to pinpoint how to link login/register to backend because we only worked through the backend for the lab. 
+I felt prepared to implement the majority of the features by looking through the labs. However, it was a bit difficult to pinpoint how to link login/register to backend because we only worked through the backend for the lab. It was also confusing to deploy my app using heroku, since it was not very clear what we should expect to see when we deploy it. I kept getting a 404 error only to realize that I should deploy with Surge to be able to see if it worked.
 
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
   
@@ -92,4 +92,4 @@ adding more summary statistics. I would also implement more backend functionalit
 
 Give a shout out to somebody from your cohort that especially helped you during your project. This can be a fellow peer, instructor, TA, mentor, etc.
 
-[Add your response here]
+Shout out to Giovanna for helping me with deploying my site!
