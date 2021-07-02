@@ -2,7 +2,7 @@
 
 Submitted by: **Ann Wang**
 
-Deployed Application: [Lifetracker Deployed Site](ADD_LINK_HERE)
+Deployed Application: [Lifetracker Deployed Site](lifetracker-sun.surge.sh)
 
 ## Application Features
 
@@ -19,7 +19,7 @@ Deployed Application: [Lifetracker Deployed Site](ADD_LINK_HERE)
 - [x] Users have access to an overview Activity page that show one summary statistic about each of the 3 types of activity tracked.
 - [x] The API should have a `security` middleware that only allows authenticated users to access resources and only allows users to access resources about themselves. 
 - [x] Users should have the ability to track at least **1** types of activities (i.e Nutrition, Exercise, Sleep, etc.). Each activity should be tracked on separate pages.
-- [ ] Deployed website with Heroku & Surge. 
+- [x] Deployed website with Heroku & Surge. 
 
 **Detailed Activity Page:**
 - [x] The detailed activity page should display a feed of all previous tracked activities.

@@ -35,15 +35,15 @@ export default function App() {
   const handleLogout = async () => {
     setAppState({})
     await API.logoutUser()
-    console.log("app", appState)
     setErrors(null)
+    // reset activity page
+    window.location.reload()
   }
 
     /** Fetch user by token generated */
   useEffect(() => {
     const fetchUser = async () => {
       setIsLoading(true)
-      console.log("refresh")
       const { data } = await API.fetchUserFromToken()
       if (data) {
         setAppState((a) => ({...a, user: data.user}))
@@ -83,7 +83,7 @@ export default function App() {
       }
     }
     fetchExercises()
-  }, [])
+  }, [appState.user])
 
   /** Fetch nutritions for user */
   useEffect(() => {
@@ -97,7 +97,7 @@ export default function App() {
       }
     }
     fetchNutritions()
-  }, [])
+  }, [appState.user])
 
   /** Fetch sleeps by user */
   useEffect(() => {
@@ -111,7 +111,7 @@ export default function App() {
       }
     }
     fetchSleeps()
-  }, [])
+  }, [appState.user])
 
    /** Fetch total exercise time by user */
    useEffect(() => {

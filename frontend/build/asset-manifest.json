@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.95184ae6.chunk.css",
+    "main.js": "/static/js/main.5fb42a29.chunk.js",
+    "main.js.map": "/static/js/main.5fb42a29.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.cc85cbe0.js",
+    "runtime-main.js.map": "/static/js/runtime-main.cc85cbe0.js.map",
+    "static/js/2.767aedbe.chunk.js": "/static/js/2.767aedbe.chunk.js",
+    "static/js/2.767aedbe.chunk.js.map": "/static/js/2.767aedbe.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.95184ae6.chunk.css.map": "/static/css/main.95184ae6.chunk.css.map",
+    "static/js/2.767aedbe.chunk.js.LICENSE.txt": "/static/js/2.767aedbe.chunk.js.LICENSE.txt",
+    "static/media/aaron-burden-4eWwSxaDhe4-unsplash.d447a230.jpg": "/static/media/aaron-burden-4eWwSxaDhe4-unsplash.d447a230.jpg",
+    "static/media/jason-wong-Qvxw6I-D0Ak-unsplash.4661a113.jpg": "/static/media/jason-wong-Qvxw6I-D0Ak-unsplash.4661a113.jpg",
+    "static/media/kike-vega-F2qh3yjz6Jk-unsplash.47d1c74b.jpg": "/static/media/kike-vega-F2qh3yjz6Jk-unsplash.47d1c74b.jpg",
+    "static/media/michele-blackwell-rAyCBQTH7ws-unsplash.6420824b.jpg": "/static/media/michele-blackwell-rAyCBQTH7ws-unsplash.6420824b.jpg",
+    "static/media/paico-oficial-bAA06m4O7co-unsplash.63b8b114.jpg": "/static/media/paico-oficial-bAA06m4O7co-unsplash.63b8b114.jpg",
+    "static/media/risto_pekkala_Alarm_clock.7b86d4f0.svg": "/static/media/risto_pekkala_Alarm_clock.7b86d4f0.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.cc85cbe0.js",
+    "static/js/2.767aedbe.chunk.js",
+    "static/css/main.95184ae6.chunk.css",
+    "static/js/main.5fb42a29.chunk.js"
+  ]
+}
