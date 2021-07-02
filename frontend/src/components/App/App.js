@@ -32,9 +32,9 @@ export default function App() {
   const handleLogIn = async () => {
 
   }
-  const handleLogout = () => {
+  const handleLogout = async () => {
     setAppState({})
-    // await API.logoutUser()
+    await API.logoutUser()
     console.log("app", appState)
     setErrors(null)
   }
@@ -125,7 +125,7 @@ export default function App() {
       }
     }
     fetchExerciseTime()
-  }, [exercises, appState, isLoading])
+  }, [exercises, appState])
 
   /** Fetch avg daily calories by user */
    useEffect(() => {
