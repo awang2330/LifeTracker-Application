@@ -1,18 +1,8 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
 
-import Navbar from '../Navbar/Navbar'
-import Home from '../Home/Home'
-import Activity from '../Activity/Activity'
-import Exercise from '../Exercise/Exercise'
-import Nutrition from '../Nutrition/Nutrition'
-import Sleep from '../Sleep/Sleep'
-import Signup from '../Signup/Signup'
-import Login from '../Login/Login'
-
-import CreateExercise from '../CreateExercise/CreateExercise'
-import CreateNutrition from '../CreateNutrition/CreateNutrition'
-import CreateSleep from '../CreateSleep/CreateSleep'
+import { Navbar, Home, Activity, Exercise, Nutrition, Sleep, Signup, Login, 
+        CreateExercise, CreateNutrition, CreateSleep } from '../index'
 
 import './App.css'
 import API from '../../services/apiClient'
@@ -28,10 +18,7 @@ export default function App() {
   const [totalExerciseTime, setTotalExerciseTime] = useState(0)
   const [avgCalories, setAvgCalories] = useState(0)
   const [avgSleepTime, setAvgSleepTime] = useState(0)
-
-  const handleLogIn = async () => {
-
-  }
+  
   const handleLogout = async () => {
     setAppState({})
     await API.logoutUser()
@@ -169,8 +156,8 @@ export default function App() {
           <Route path='/exercise' element={ <Exercise appState={appState} user={appState?.user} exercises={exercises}/>} />
           <Route path='/nutrition' element={ <Nutrition appState={appState} user={appState?.user} nutritions={nutritions}/>} />
           <Route path='/sleep' element={ <Sleep appState={appState} user={appState?.user} sleeps={sleeps}/>} />
-          <Route path='/signup' element={ <Signup handleLogIn={handleLogIn} setAppState={setAppState}/>} />
-          <Route path='/login' element={ <Login handleLogIn={handleLogIn} setAppState={setAppState}/>} />
+          <Route path='/signup' element={ <Signup setAppState={setAppState}/>} />
+          <Route path='/login' element={ <Login setAppState={setAppState}/>} />
 
           <Route path='/exercise/create' element={ <CreateExercise appState={appState} user={appState?.user} handleUpdateExercise={handleUpdateExercise}/>} />
           <Route path='/nutrition/create' element={ <CreateNutrition appState={appState} user={appState?.user} handleUpdateNutrition={handleUpdateNutrition}/>} />
