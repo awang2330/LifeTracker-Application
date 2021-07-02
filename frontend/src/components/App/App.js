@@ -32,9 +32,9 @@ export default function App() {
   const handleLogIn = async () => {
 
   }
-  const handleLogout = async () => {
-    await API.logoutUser()
+  const handleLogout = () => {
     setAppState({})
+    // await API.logoutUser()
     console.log("app", appState)
     setErrors(null)
   }

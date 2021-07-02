@@ -44,6 +44,11 @@ User Register/Login/Logout
 
 <img src="/frontend/src/assets/ui login logout.gif" alt="">
 
+
+Landing Page 
+
+<img src="/frontend/src/assets/landing.gif" alt="">
+
 Activity: Exercise 
 
 <img src="/frontend/src/assets/activity.gif" alt="">
@@ -68,15 +73,16 @@ Authentication 2
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-[Add your response here]
+I felt prepared to implement the majority of the features by looking through the labs. However, it was a bit difficult to pinpoint how to link login/register to backend because we only worked through the backend for the lab. 
 
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
   
-[Add your response here]
+I would implement more features such as being able to categorize actiivities by each form component, as well as 
+adding more summary statistics. I would also implement more backend functionalities such as accessing specific activities by id and grouping activities by date added. I would also add in tests for each component to ensure everything is working correctly.
 
 * Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
-[Add your response here]
+
 
 ### Open-source libraries used
 
