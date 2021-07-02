@@ -1,29 +1,29 @@
 
 import HomeItem from '../HomeItem/HomeItem'
 import watch from '../../assets/jason-wong-Qvxw6I-D0Ak-unsplash.jpg'
-import fitness from '../../assets/kike-vega-F2qh3yjz6Jk-unsplash.jpg'
-import food from '../../assets/michele-blackwell-rAyCBQTH7ws-unsplash.jpg'
-import rest from '../../assets/aaron-burden-4eWwSxaDhe4-unsplash.jpg'
-import planner from '../../assets/paico-oficial-bAA06m4O7co-unsplash.jpg'
+import exercise from '../../assets/kike-vega-F2qh3yjz6Jk-unsplash.jpg'
+import nutrition from '../../assets/michele-blackwell-rAyCBQTH7ws-unsplash.jpg'
+import sleep from '../../assets/aaron-burden-4eWwSxaDhe4-unsplash.jpg'
+import activity from '../../assets/paico-oficial-bAA06m4O7co-unsplash.jpg'
 import './Home.css'
 
 export default function Home() {
   const items = [
     {
-      name: "Planner",
-      image: planner
+      name: "activity",
+      image: activity
     },
     {
-      name: "Fitness",
-      image: fitness
+      name: "exercise",
+      image: exercise
     },
     {
-      name: "Food",
-      image: food
+      name: "nutrition",
+      image: nutrition
     },
     {
-      name: "Rest",
-      image: rest
+      name: "sleep",
+      image: sleep
     }
   ]
 
