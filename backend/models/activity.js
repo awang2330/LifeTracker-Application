@@ -145,20 +145,44 @@ class Activity {
 
   /** Fetch avg sleep time */
   static async listAvgSleepHours({ user }) {
-    console.log("here")
     if (!user) {
       throw new UnauthorizedError(`No user logged in.`)
     }
     
-    const results = await db.query(`
-      SELECT AVG(Date(end_date) - Date(start_date)) as "avgSleepHours"
+    const count_results = await db.query(`
+      SELECT COUNT(id)
       FROM sleeps
       WHERE user_id = (
         SELECT id FROM users WHERE username = $1
       );
     `, [user.username]
     )
-    return results.rows[0]
+
+    const count = count_results.rows[0].count
+
+    const diff_results = await db.query(`
+      SELECT (end_date - start_date) as "diff"
+      FROM sleeps
+      WHERE user_id = (
+        SELECT id FROM users WHERE username = $1
+      );
+    `, [user.username]
+    )
+
+    var sum = 0
+    for (let i = 0; i < diff_results.rows.length; i++) {
+      if (diff_results?.rows[i]?.diff?.days) {
+        sum += diff_results.rows[i].diff.days * 24
+      }
+      if (diff_results?.rows[i]?.diff?.hours) {
+        sum += diff_results.rows[i].diff.hours
+      }
+      if (diff_results?.rows[i]?.diff?.minutes) {
+        sum += diff_results.rows[i].diff.minutes / 60
+      }
+    }
+
+    return Number(sum) / Number(count)
   }
 
   /** Fetch a lsit of all sleeps of an user */
